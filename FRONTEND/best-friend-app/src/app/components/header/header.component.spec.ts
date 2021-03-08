@@ -1,28 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatMenuModule } from '@angular/material/menu';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatMenuModule } from '@angular/material/menu'
 
-
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './header.component'
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  let component: HeaderComponent
+  let fixture: ComponentFixture<HeaderComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ],
+      declarations: [HeaderComponent],
       imports: [MatMenuModule]
     })
-    .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(HeaderComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
