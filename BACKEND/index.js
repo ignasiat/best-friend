@@ -6,6 +6,7 @@ const cors = require('cors');
 const { connect } = require('mongoose');
 
 const userRouter = require('./routers/userRouter');
+const dogRouter = require('./routers/dogRouter');
 
 require('dotenv').config();
 
@@ -19,5 +20,6 @@ app.use(cors());
 connect(process.env.DDBB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/api/user', userRouter);
+app.use('/api/dog', dogRouter);
 
 app.listen(port, () => debug(`Server running in ${chalk.green(port)}`));
