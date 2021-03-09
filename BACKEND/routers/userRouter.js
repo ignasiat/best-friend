@@ -10,6 +10,11 @@ function UserRouter() {
     .post(userController.createUser)
     .get(userController.getAllUsers);
 
+  router
+    .route('/:userId')
+    .get(userController.getUserById)
+    .put(userController.updateUserById)
+    .delete(userController.deleteUserById);
   return router;
 }
 
