@@ -22,7 +22,8 @@ async function getAllDogs(req, res) {
     .populate('age')
     .populate('sex')
     .populate('size')
-    .populate('color');
+    .populate('color')
+    .exec();
 
   res.json(allDogs);
 }
@@ -36,7 +37,8 @@ async function getDogById(req, res) {
     .populate('age')
     .populate('sex')
     .populate('size')
-    .populate('color');
+    .populate('color')
+    .exec();
 
   res.json(findDog);
 }
@@ -50,7 +52,8 @@ async function updateDogById(req, res) {
     .populate('age')
     .populate('sex')
     .populate('size')
-    .populate('color');
+    .populate('color')
+    .exec();
 
   res.json(updatedDog);
 }
@@ -64,7 +67,8 @@ async function deleteDogById(req, res) {
     .populate('age')
     .populate('sex')
     .populate('size')
-    .populate('color');
+    .populate('color')
+    .exec();
 
   res.json(deletedDog);
 }
