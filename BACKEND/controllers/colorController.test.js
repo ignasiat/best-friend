@@ -9,7 +9,7 @@ describe('Given a getAllColors function', () => {
       const req = {};
       const res = { json: jest.fn() };
 
-      Color.find = jest.fn();
+      Color.find = jest.fn().mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await getAllColors(req, res);
 

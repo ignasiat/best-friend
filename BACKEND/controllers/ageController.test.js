@@ -9,7 +9,7 @@ describe('Given a getAllAges function', () => {
       const req = {};
       const res = { json: jest.fn() };
 
-      Age.find = jest.fn();
+      Age.find = jest.fn().mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await getAllAges(req, res);
 

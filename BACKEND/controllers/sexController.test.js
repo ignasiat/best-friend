@@ -9,7 +9,7 @@ describe('Given a getAllSexes function', () => {
       const req = {};
       const res = { json: jest.fn() };
 
-      Sex.find = jest.fn();
+      Sex.find = jest.fn().mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await getAllSexes(req, res);
 

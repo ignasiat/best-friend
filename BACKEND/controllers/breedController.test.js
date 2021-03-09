@@ -9,7 +9,7 @@ describe('Given a getAllBreds function', () => {
       const req = {};
       const res = { json: jest.fn() };
 
-      Breed.find = jest.fn();
+      Breed.find = jest.fn().mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await getAllBreds(req, res);
 
