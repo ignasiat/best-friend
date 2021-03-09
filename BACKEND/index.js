@@ -9,6 +9,7 @@ const userRouter = require('./routers/userRouter');
 const dogRouter = require('./routers/dogRouter');
 const breedRouter = require('./routers/breedRouter');
 const ageRouter = require('./routers/ageRouter');
+const sexRouter = require('./routers/sexRouter');
 
 require('dotenv').config();
 
@@ -25,5 +26,6 @@ app.use('/api/user', userRouter);
 app.use('/api/dog', dogRouter);
 app.use('/api/breed', breedRouter);
 app.use('/api/age', ageRouter);
+app.use('/api/sex', sexRouter);
 
 app.listen(port, () => debug(`Server running in ${chalk.green(port)}`));
