@@ -7,6 +7,7 @@ const { connect } = require('mongoose');
 
 const userRouter = require('./routers/userRouter');
 const dogRouter = require('./routers/dogRouter');
+const breedRouter = require('./routers/breedRouter');
 
 require('dotenv').config();
 
@@ -21,5 +22,6 @@ connect(process.env.DDBB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
 app.use('/api/user', userRouter);
 app.use('/api/dog', dogRouter);
+app.use('/api/breed', breedRouter);
 
 app.listen(port, () => debug(`Server running in ${chalk.green(port)}`));
