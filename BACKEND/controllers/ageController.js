@@ -1,7 +1,7 @@
 const Age = require('../models/ageModel');
 
 async function getAllAges(req, res) {
-  const ages = await Age.find({});
+  const ages = await Age.find({}).exec();
 
   res.json(ages);
 }

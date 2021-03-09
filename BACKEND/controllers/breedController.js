@@ -1,7 +1,7 @@
 const Breed = require('../models/breedModel');
 
 async function getAllBreds(req, res) {
-  const breeds = await Breed.find({});
+  const breeds = await Breed.find({}).exec();
 
   res.json(breeds);
 }

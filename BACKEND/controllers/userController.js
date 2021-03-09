@@ -14,7 +14,8 @@ async function getAllUsers(req, res) {
   const allUsers = await User
     .find({})
     .populate('address')
-    .populate('userType');
+    .populate('userType')
+    .exec();
 
   res.json(allUsers);
 }
@@ -24,7 +25,8 @@ async function getUserById(req, res) {
   const user = await User
     .findById(userId)
     .populate('address')
-    .populate('userType');
+    .populate('userType')
+    .exec();
 
   res.json(user);
 }
@@ -34,7 +36,8 @@ async function updateUserById(req, res) {
   const updatedUser = await User
     .findByIdAndUpdate(userId, req.body, { new: true })
     .populate('address')
-    .populate('userType');
+    .populate('userType')
+    .exec();
 
   res.json(updatedUser);
 }
@@ -44,7 +47,8 @@ async function deleteUserById(req, res) {
   const deletedUser = await User
     .findByIdAndRemove(userId)
     .populate('address')
-    .populate('userType');
+    .populate('userType')
+    .exec();
 
   res.json(deletedUser);
 }
