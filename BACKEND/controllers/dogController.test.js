@@ -1,5 +1,5 @@
 const {
-  createDog, getAllDogs, getDogById, updateDogById, deleteDogById
+  createDog, getAllDogs, getDogById, getDogsByUser, updateDogById, deleteDogById
 } = require('./dogController');
 
 const Dog = require('../models/dogModel');
@@ -48,7 +48,10 @@ describe('Given a getAllDogs function', () => {
                       populate: jest.fn()
                         .mockImplementationOnce(() => ({
                           populate: jest.fn()
-                            .mockImplementationOnce(() => ({ populate: jest.fn() }))
+                            .mockImplementationOnce(() => ({
+                              populate: jest.fn()
+                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                            }))
                         }))
                     }))
                 }))
@@ -79,7 +82,10 @@ describe('Given a getDogById function', () => {
                       populate: jest.fn()
                         .mockImplementationOnce(() => ({
                           populate: jest.fn()
-                            .mockImplementationOnce(() => ({ populate: jest.fn() }))
+                            .mockImplementationOnce(() => ({
+                              populate: jest.fn()
+                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                            }))
                         }))
                     }))
                 }))
@@ -87,6 +93,40 @@ describe('Given a getDogById function', () => {
         }));
 
       await getDogById(req, res);
+
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a getDogsByUser function', () => {
+  describe('When is invoked', () => {
+    test('Then res.json should be invoked', async () => {
+      const req = { params: { userId: 11 } };
+      const res = { json: jest.fn() };
+
+      Dog.find
+        .mockImplementationOnce(() => ({
+          populate: jest.fn()
+            .mockImplementationOnce(() => ({
+              populate: jest.fn()
+                .mockImplementationOnce(() => ({
+                  populate: jest.fn()
+                    .mockImplementationOnce(() => ({
+                      populate: jest.fn()
+                        .mockImplementationOnce(() => ({
+                          populate: jest.fn()
+                            .mockImplementationOnce(() => ({
+                              populate: jest.fn()
+                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                            }))
+                        }))
+                    }))
+                }))
+            }))
+        }));
+
+      await getDogsByUser(req, res);
 
       expect(res.json).toHaveBeenCalled();
     });
@@ -110,7 +150,10 @@ describe('Given a updateDogById function', () => {
                       populate: jest.fn()
                         .mockImplementationOnce(() => ({
                           populate: jest.fn()
-                            .mockImplementationOnce(() => ({ populate: jest.fn() }))
+                            .mockImplementationOnce(() => ({
+                              populate: jest.fn()
+                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                            }))
                         }))
                     }))
                 }))
@@ -141,7 +184,10 @@ describe('Given a deleteDogById function', () => {
                       populate: jest.fn()
                         .mockImplementationOnce(() => ({
                           populate: jest.fn()
-                            .mockImplementationOnce(() => ({ populate: jest.fn() }))
+                            .mockImplementationOnce(() => ({
+                              populate: jest.fn()
+                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                            }))
                         }))
                     }))
                 }))

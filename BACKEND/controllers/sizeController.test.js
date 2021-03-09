@@ -9,7 +9,7 @@ describe('Given a getAllSizes function', () => {
       const req = {};
       const res = { json: jest.fn() };
 
-      Size.find = jest.fn();
+      Size.find = jest.fn().mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await getAllSizes(req, res);
 

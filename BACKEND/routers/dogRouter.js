@@ -11,6 +11,10 @@ function DogRouter() {
     .get(dogController.getAllDogs);
 
   router
+    .route('/user/:userId')
+    .get(dogController.getDogsByUser);
+
+  router
     .route('/:dogId')
     .get(dogController.getDogById)
     .put(dogController.updateDogById)

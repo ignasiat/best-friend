@@ -43,6 +43,21 @@ async function getDogById(req, res) {
   res.json(findDog);
 }
 
+async function getDogsByUser(req, res) {
+  const { userId } = req.params;
+  const findDogs = await Dog
+    .find({ user: userId })
+    .populate('user')
+    .populate('breed')
+    .populate('age')
+    .populate('sex')
+    .populate('size')
+    .populate('color')
+    .exec();
+
+  res.json(findDogs);
+}
+
 async function updateDogById(req, res) {
   const { dogId } = req.params;
   const updatedDog = await Dog
@@ -74,5 +89,5 @@ async function deleteDogById(req, res) {
 }
 
 module.exports = {
-  createDog, getAllDogs, getDogById, updateDogById, deleteDogById
+  createDog, getAllDogs, getDogById, getDogsByUser, updateDogById, deleteDogById
 };
