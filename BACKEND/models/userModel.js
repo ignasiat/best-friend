@@ -9,7 +9,7 @@ const userSchema = new Schema({
   website: String,
   information: String,
   photoURL: String,
-  userType: { type: Schema.Types.ObjectId, ref: 'UserType' }
+  userType: String
 });
 
 module.exports = model('User', userSchema);

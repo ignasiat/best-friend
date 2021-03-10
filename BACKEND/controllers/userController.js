@@ -1,6 +1,5 @@
 const User = require('../models/userModel');
 require('../models/addressModel');
-require('../models/userTypeModel');
 
 function createUser(req, res) {
   const newUser = new User(req.body);
@@ -14,7 +13,6 @@ async function getAllUsers(req, res) {
   const allUsers = await User
     .find({})
     .populate('address')
-    .populate('userType')
     .exec();
 
   res.json(allUsers);
@@ -25,7 +23,6 @@ async function getUserById(req, res) {
   const user = await User
     .findById(userId)
     .populate('address')
-    .populate('userType')
     .exec();
 
   res.json(user);
@@ -36,7 +33,6 @@ async function updateUserById(req, res) {
   const updatedUser = await User
     .findByIdAndUpdate(userId, req.body, { new: true })
     .populate('address')
-    .populate('userType')
     .exec();
 
   res.json(updatedUser);
@@ -47,7 +43,6 @@ async function deleteUserById(req, res) {
   const deletedUser = await User
     .findByIdAndRemove(userId)
     .populate('address')
-    .populate('userType')
     .exec();
 
   res.json(deletedUser);

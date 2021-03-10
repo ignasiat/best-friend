@@ -4,11 +4,9 @@ const {
 
 const User = require('../models/userModel');
 require('../models/addressModel');
-require('../models/userTypeModel');
 
 jest.mock('../models/userModel');
 jest.mock('../models/addressModel');
-jest.mock('../models/userTypeModel');
 
 describe('Given a createUser function', () => {
   describe('When is invoked ', () => {
@@ -32,10 +30,7 @@ describe('Given a getAllUsers function', () => {
       User.find
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await getAllUsers(req, res);
@@ -54,10 +49,7 @@ describe('Given a getUserById function', () => {
       User.findById
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await getUserById(req, res);
@@ -76,10 +68,7 @@ describe('Given a updateUserById function', () => {
       User.findByIdAndUpdate
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await updateUserById(req, res);
@@ -98,10 +87,7 @@ describe('Given a deleteUserById function', () => {
       User.findByIdAndRemove
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await deleteUserById(req, res);

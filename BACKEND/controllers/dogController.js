@@ -1,9 +1,7 @@
 const Dog = require('../models/dogModel');
 require('../models/userModel');
 require('../models/breedModel');
-require('../models/ageModel');
-require('../models/sexModel');
-require('../models/sizeModel');
+require('../models/addressModel');
 require('../models/colorModel');
 
 function createDog(req, res) {
@@ -18,10 +16,11 @@ async function getAllDogs(req, res) {
   const allDogs = await Dog
     .find({})
     .populate('user')
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    })
     .populate('breed')
-    .populate('age')
-    .populate('sex')
-    .populate('size')
     .populate('color')
     .exec();
 
@@ -33,10 +32,11 @@ async function getDogById(req, res) {
   const findDog = await Dog
     .findById(dogId)
     .populate('user')
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    })
     .populate('breed')
-    .populate('age')
-    .populate('sex')
-    .populate('size')
     .populate('color')
     .exec();
 
@@ -48,10 +48,11 @@ async function getDogsByUser(req, res) {
   const findDogs = await Dog
     .find({ user: userId })
     .populate('user')
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    })
     .populate('breed')
-    .populate('age')
-    .populate('sex')
-    .populate('size')
     .populate('color')
     .exec();
 
@@ -63,10 +64,11 @@ async function updateDogById(req, res) {
   const updatedDog = await Dog
     .findByIdAndUpdate(dogId, req.body, { new: true })
     .populate('user')
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    })
     .populate('breed')
-    .populate('age')
-    .populate('sex')
-    .populate('size')
     .populate('color')
     .exec();
 
@@ -78,10 +80,11 @@ async function deleteDogById(req, res) {
   const deletedDog = await Dog
     .findByIdAndRemove(dogId)
     .populate('user')
+    .populate({
+      path: 'user',
+      populate: { path: 'address' }
+    })
     .populate('breed')
-    .populate('age')
-    .populate('sex')
-    .populate('size')
     .populate('color')
     .exec();
 

@@ -5,17 +5,13 @@ const {
 const Dog = require('../models/dogModel');
 require('../models/userModel');
 require('../models/breedModel');
-require('../models/ageModel');
-require('../models/sexModel');
-require('../models/sizeModel');
+require('../models/addressModel');
 require('../models/colorModel');
 
 jest.mock('../models/dogModel');
 jest.mock('../models/userModel');
 jest.mock('../models/breedModel');
-jest.mock('../models/ageModel');
-jest.mock('../models/sexModel');
-jest.mock('../models/sizeModel');
+jest.mock('../models/addressModel');
 jest.mock('../models/colorModel');
 
 describe('Given a createDog function', () => {
@@ -46,13 +42,7 @@ describe('Given a getAllDogs function', () => {
                   populate: jest.fn()
                     .mockImplementationOnce(() => ({
                       populate: jest.fn()
-                        .mockImplementationOnce(() => ({
-                          populate: jest.fn()
-                            .mockImplementationOnce(() => ({
-                              populate: jest.fn()
-                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                            }))
-                        }))
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
                     }))
                 }))
             }))
@@ -80,13 +70,7 @@ describe('Given a getDogById function', () => {
                   populate: jest.fn()
                     .mockImplementationOnce(() => ({
                       populate: jest.fn()
-                        .mockImplementationOnce(() => ({
-                          populate: jest.fn()
-                            .mockImplementationOnce(() => ({
-                              populate: jest.fn()
-                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                            }))
-                        }))
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
                     }))
                 }))
             }))
@@ -114,13 +98,7 @@ describe('Given a getDogsByUser function', () => {
                   populate: jest.fn()
                     .mockImplementationOnce(() => ({
                       populate: jest.fn()
-                        .mockImplementationOnce(() => ({
-                          populate: jest.fn()
-                            .mockImplementationOnce(() => ({
-                              populate: jest.fn()
-                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                            }))
-                        }))
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
                     }))
                 }))
             }))
@@ -148,13 +126,7 @@ describe('Given a updateDogById function', () => {
                   populate: jest.fn()
                     .mockImplementationOnce(() => ({
                       populate: jest.fn()
-                        .mockImplementationOnce(() => ({
-                          populate: jest.fn()
-                            .mockImplementationOnce(() => ({
-                              populate: jest.fn()
-                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                            }))
-                        }))
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
                     }))
                 }))
             }))
@@ -182,13 +154,7 @@ describe('Given a deleteDogById function', () => {
                   populate: jest.fn()
                     .mockImplementationOnce(() => ({
                       populate: jest.fn()
-                        .mockImplementationOnce(() => ({
-                          populate: jest.fn()
-                            .mockImplementationOnce(() => ({
-                              populate: jest.fn()
-                                .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                            }))
-                        }))
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
                     }))
                 }))
             }))
