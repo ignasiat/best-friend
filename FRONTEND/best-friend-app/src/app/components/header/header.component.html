@@ -9,12 +9,16 @@
         <span>User Info</span>
       </button>
       <button mat-menu-item>
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
+        <a routerLink="/">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
       </button>
       <button mat-menu-item>
-        <mat-icon>pets</mat-icon>
-        <span>Dogs</span>
+        <a routerLink="/dogs">
+          <mat-icon>pets</mat-icon>
+          <span>Dogs</span>
+        </a>
       </button>
       <button mat-menu-item>
         <mat-icon>group</mat-icon>
@@ -42,8 +46,8 @@
 <nav class="nav--desktop" aria-label="Menu Site">
   <img src="../../../assets/bestfriend-menu.svg" alt="logo" class="nav__logo">
   <ul>
-    <li>Home</li>
-    <li>Dogs</li>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/dogs">Dogs</a></li>
     <li>Members</li>
     <li>About Us</li>
   </ul>
