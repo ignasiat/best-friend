@@ -3,7 +3,14 @@ export interface Dog {
   name: String,
   user: {
     _id: String,
-    address: String,
+    address: {
+      _id: String,
+      street: String,
+      number: String,
+      city: String,
+      zipCode: String,
+      region: String
+    }
     phone: String,
     email: String,
     password: String,
