@@ -10,7 +10,8 @@ interface constantsInterface {
   PUPPY: String,
   YOUNG: String,
   ADULT: String,
-  SENIOR: String
+  SENIOR: String,
+  ANY: String
 }
 
 export const constants: constantsInterface = {
@@ -25,5 +26,6 @@ export const constants: constantsInterface = {
   PUPPY: 'PUPPY',
   YOUNG: 'YOUNG',
   ADULT: 'ADULT',
-  SENIOR: 'SENIOR'
+  SENIOR: 'SENIOR',
+  ANY: 'ANY'
 }

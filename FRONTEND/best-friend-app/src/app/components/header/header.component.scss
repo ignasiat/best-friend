@@ -21,6 +21,11 @@
   height: 50px;
 }
 
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: #000;
+}
+
 @media only screen and (min-width: 600px) {
   .nav--mobile {
     display: none;

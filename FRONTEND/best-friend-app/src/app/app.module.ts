@@ -13,12 +13,18 @@ import { MatCardModule } from '@angular/material/card'
 import { HomeComponent } from './pages/home/home.component'
 import { MatButtonModule } from '@angular/material/button'
 import { HttpClientModule } from '@angular/common/http'
+import { DogsComponent } from './pages/dogs/dogs.component'
+import { MatSelectModule } from '@angular/material/select'
+import { MatTableModule } from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    DogsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,11 @@ import { HttpClientModule } from '@angular/common/http'
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [MatMenuModule],
   providers: [],

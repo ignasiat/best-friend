@@ -8,13 +8,17 @@ import { DogService } from './dog.service'
 })
 export class DogStoreService {
   dogs$ = new BehaviorSubject<Dog[]>([])
+  dogsCopy$ = new BehaviorSubject<Dog[]>([])
 
   getDogs (): Dog[] {
     return this.dogs$.getValue()
   }
 
   apiDogs (): void {
-    this.DogService.fetchDogs().subscribe((answer) => this.dogs$.next(answer))
+    this.DogService.fetchDogs().subscribe((answer) => {
+      this.dogs$.next(answer)
+      this.dogsCopy$.next(answer)
+    })
   }
 
   constructor (private DogService: DogService) { }
