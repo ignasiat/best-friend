@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
 import { HomeComponent } from './pages/home/home.component'
 import { MatButtonModule } from '@angular/material/button'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatButtonModule } from '@angular/material/button'
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   exports: [MatMenuModule],
   providers: [],

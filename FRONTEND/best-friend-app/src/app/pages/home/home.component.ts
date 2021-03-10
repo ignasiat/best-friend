@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { DogStoreService } from 'src/app/core/services/dog-store.service'
 
 @Component({
   selector: 'app-home',
@@ -78,6 +79,13 @@ export class HomeComponent implements OnInit {
   }
   ]
 
+  dogs$ = this.DogStoreService.dogs$
+
+  constructor (private DogStoreService: DogStoreService) {
+
+  }
+
   ngOnInit (): void {
+    this.DogStoreService.apiDogs()
   }
 }
