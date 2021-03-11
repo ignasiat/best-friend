@@ -1,7 +1,9 @@
 @import "../../../styles/colors";
 @import "../../../styles/links";
+@import "../../../styles/title";
 
 main {
+  font-family: Montserrat;
   color: $color-primary;
   width: 95%;
   margin: 0 auto;
@@ -14,13 +16,6 @@ main {
       width: 300px;
     }
     div {
-      h1 {
-        font-size: 48px;
-        font-weight: 400;
-        text-align: center;
-        line-height: 50px;
-        
-      }
       h2 {
         padding-top: 20px;
         font-size: 48px;
@@ -36,11 +31,6 @@ main {
         margin-right: 20px;
       }
       div {
-        h1 {
-          font-size: 62px;
-          font-weight: 600;
-          
-        }
         h2 {
           padding-top: 30px;
           font-size: 62px;
