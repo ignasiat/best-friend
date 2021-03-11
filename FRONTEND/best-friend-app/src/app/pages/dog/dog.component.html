@@ -1,0 +1,54 @@
+<main *ngIf="selectedDog$ | async as selectedDog">
+  
+  <h1>{{selectedDog.name}}</h1>
+
+  <div class="carousel">
+  <ngb-carousel *ngIf="selectedDog.photosURL">
+    <ng-template ngbSlide>
+      <div class="wrapper">
+        <img [src]="selectedDog.photosURL[0]" alt="selectedDog.name">
+      </div>
+      </ng-template>
+      <ng-template ngbSlide *ngIf="selectedDog.photosURL[1]">
+        <div class="wrapper">
+          <img [src]="selectedDog.photosURL[1]" alt="selectedDog.name">
+        </div>
+      </ng-template>
+      <ng-template ngbSlide *ngIf="selectedDog.photosURL[2]">
+        <div class="wrapper">
+          <img [src]="selectedDog.photosURL[2]"  alt="selectedDog.name">
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="dog-data">
+    <div class="dog-data__item">
+      <span class="item-title">Shelter:</span> {{selectedDog.user.name}}
+    </div>
+    <div class="dog-data__item">
+      <span class="item-title">Breed:</span> {{selectedDog.breed.name}}
+    </div>
+    <div class="dog-data__group">
+      <div class="dog-data__item">
+        <span class="item-title">Age:</span> {{selectedDog.age.toLowerCase()
+      }}
+      </div>
+      <div class="dog-data__item">
+        <span class="item-title">Sex:</span> {{selectedDog.sex.toLowerCase()}}
+      </div>
+      <div class="dog-data__item">
+        <span class="item-title">Size:</span> {{selectedDog.size.toLowerCase()}}
+      </div>
+      <div class="dog-data__item">
+        <span class="item-title">Color:</span> {{selectedDog.color.name}}
+      </div>
+    </div>
+    <div class="dog-data__item">
+      <span class="item-title">Description:</span> {{selectedDog.description}}
+    </div>
+    <div class="dog-data__button">
+      <button type="button">ADOPT</button>
+    </div>
+</div>
+
+</main>
