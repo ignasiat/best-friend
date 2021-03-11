@@ -1,0 +1,15 @@
+<mat-card-header>
+  <img mat-card-avatar src={{dog.shelter.photoURL}} alt="shelter">
+  <mat-card-title><a [routerLink]="['/dog', dog._id]">{{dog.name}}</a></mat-card-title>
+  <mat-card-subtitle><a [routerLink]="['/user', dog.shelter._id]">{{dog.shelter.name}}</a></mat-card-subtitle>
+</mat-card-header>
+<a [routerLink]="['/dog', dog._id]"><img mat-card-image src={{dog.photosURL[0]}} alt="Dog"></a>
+<mat-card-content>
+  <p>
+    {{dog.description}}
+  </p>
+</mat-card-content>
+<mat-card-actions>
+  <a [routerLink]="['/dog', dog._id]" mat-button>ADOPT</a>
+  <a [routerLink]="['/user', dog.shelter._id]" mat-button>SPONSOR</a>
+</mat-card-actions>

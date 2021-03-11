@@ -1,5 +1,5 @@
 const {
-  createDog, getAllDogs, getDogById, getDogsByUser, updateDogById, deleteDogById
+  createDog, getAllDogs, getDogById, getDogsByShelter, updateDogById, deleteDogById
 } = require('./dogController');
 
 const Dog = require('../models/dogModel');
@@ -83,7 +83,7 @@ describe('Given a getDogById function', () => {
   });
 });
 
-describe('Given a getDogsByUser function', () => {
+describe('Given a getDogsByShelter function', () => {
   describe('When is invoked', () => {
     test('Then res.json should be invoked', async () => {
       const req = { params: { userId: 11 } };
@@ -104,7 +104,7 @@ describe('Given a getDogsByUser function', () => {
             }))
         }));
 
-      await getDogsByUser(req, res);
+      await getDogsByShelter(req, res);
 
       expect(res.json).toHaveBeenCalled();
     });

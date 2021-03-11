@@ -1,8 +1,9 @@
 export interface Dog {
   _id: String,
   name: String,
-  user: {
+  shelter: {
     _id: String,
+    name: String,
     address: {
       _id: String,
       street: String,
@@ -31,5 +32,6 @@ export interface Dog {
     name: String
   },
   description: String,
-  photosURL: [String]
+  photosURL: [String],
+  adoption: Boolean
 }

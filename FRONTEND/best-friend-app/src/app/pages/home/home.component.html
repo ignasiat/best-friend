@@ -8,22 +8,9 @@
   </div>
 
   <section>
-    <mat-card *ngFor="let dog of dogs$ | async | slice:0:6" class="example-card">
-      <mat-card-header>
-        <img mat-card-avatar src={{dog.user.photoURL}} alt="shelter">
-        <mat-card-title>{{dog.name}}</mat-card-title>
-        <mat-card-subtitle>{{dog.user.name}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src={{dog.photosURL[0]}} alt="Dog">
-      <mat-card-content>
-        <p>
-          {{dog.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>ADOPT</button>
-        <button mat-button>SPONSOR</button>
-      </mat-card-actions>
+    <!-- <app-dog-card ></app-dog-card> -->
+    <mat-card *ngFor="let dog of dogs$ | async | slice:0:6" class="example-card">    
+    <app-dog-card [dog]="dog"></app-dog-card>
     </mat-card>
   </section>
 

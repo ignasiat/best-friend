@@ -31,27 +31,13 @@
   
 
     <button mat-icon-button aria-label="Search button" (click)="search(sexSelect.value,ageSelect.value,sizeSelect.value)">
-      <mat-icon>search</mat-icon> Search
+      <mat-icon>search</mat-icon> SEARCH
     </button>
   </div>
 
   <section>
     <mat-card *ngFor="let dog of dogsCopy$ | async" class="example-card">
-      <mat-card-header>
-        <img mat-card-avatar src={{dog.user.photoURL}} alt="shelter" loading="lazy">
-        <mat-card-title>{{dog.name}}</mat-card-title>
-        <mat-card-subtitle>{{dog.user.name}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src={{dog.photosURL[0]}} alt="Dog" loading="lazy">
-      <mat-card-content>
-        <p>
-          {{dog.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>ADOPT</button>
-        <button mat-button>SPONSOR</button>
-      </mat-card-actions>
+     <app-dog-card [dog]="dog"></app-dog-card>
     </mat-card>
   </section>
 
