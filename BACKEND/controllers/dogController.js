@@ -15,9 +15,9 @@ function createDog(req, res) {
 async function getAllDogs(req, res) {
   const allDogs = await Dog
     .find({})
-    .populate('user')
+    .populate('shelter')
     .populate({
-      path: 'user',
+      path: 'shelter',
       populate: { path: 'address' }
     })
     .populate('breed')
@@ -31,9 +31,9 @@ async function getDogById(req, res) {
   const { dogId } = req.params;
   const findDog = await Dog
     .findById(dogId)
-    .populate('user')
+    .populate('shelter')
     .populate({
-      path: 'user',
+      path: 'shelter',
       populate: { path: 'address' }
     })
     .populate('breed')
@@ -43,13 +43,13 @@ async function getDogById(req, res) {
   res.json(findDog);
 }
 
-async function getDogsByUser(req, res) {
+async function getDogsByShelter(req, res) {
   const { userId } = req.params;
   const findDogs = await Dog
-    .find({ user: userId })
-    .populate('user')
+    .find({ shelter: userId })
+    .populate('shelter')
     .populate({
-      path: 'user',
+      path: 'shelter',
       populate: { path: 'address' }
     })
     .populate('breed')
@@ -63,9 +63,9 @@ async function updateDogById(req, res) {
   const { dogId } = req.params;
   const updatedDog = await Dog
     .findByIdAndUpdate(dogId, req.body, { new: true })
-    .populate('user')
+    .populate('shelter')
     .populate({
-      path: 'user',
+      path: 'shelter',
       populate: { path: 'address' }
     })
     .populate('breed')
@@ -79,9 +79,9 @@ async function deleteDogById(req, res) {
   const { dogId } = req.params;
   const deletedDog = await Dog
     .findByIdAndRemove(dogId)
-    .populate('user')
+    .populate('shelter')
     .populate({
-      path: 'user',
+      path: 'shelter',
       populate: { path: 'address' }
     })
     .populate('breed')
@@ -92,5 +92,5 @@ async function deleteDogById(req, res) {
 }
 
 module.exports = {
-  createDog, getAllDogs, getDogById, getDogsByUser, updateDogById, deleteDogById
+  createDog, getAllDogs, getDogById, getDogsByShelter, updateDogById, deleteDogById
 };

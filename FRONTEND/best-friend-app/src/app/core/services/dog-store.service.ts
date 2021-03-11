@@ -17,6 +17,7 @@ export class DogStoreService {
 
   apiDogs (): void {
     this.DogService.fetchDogs().subscribe((answer) => {
+      answer = answer.filter(dog => dog.adoption)
       this.dogs$.next(answer)
       this.dogsCopy$.next(answer)
     })

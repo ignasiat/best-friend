@@ -11,8 +11,8 @@ function DogRouter() {
     .get(dogController.getAllDogs);
 
   router
-    .route('/user/:userId')
-    .get(dogController.getDogsByUser);
+    .route('/shelter/:userId')
+    .get(dogController.getDogsByShelter);
 
   router
     .route('/:dogId')
