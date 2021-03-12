@@ -7,6 +7,25 @@
   </div>
   <div>
     <mat-form-field appearance="fill" >
+      <mat-label>Shelter</mat-label>
+      <mat-select  formControlName="shelter">
+        <mat-option *ngFor="let shelter of shelters$ | async" [value]="shelter._id">
+          {{shelter.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              formControlName="description"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5">
+    </textarea>
+  </mat-form-field>
+  <div>
+    <mat-form-field appearance="fill" >
       <mat-label>Sex</mat-label>
       <mat-select  formControlName="sex">
         <mat-option *ngFor="let sex of sexArray" [value]="sex">
@@ -56,15 +75,15 @@
     </mat-form-field>
   </div>
   <div>
-    <input type="checkbox" formControlName="adoption" />For adoption
+    <input type="checkbox" formControlName="adoption" checked/>For adoption
   </div>
   <div>
     <label>
       Pictures
-      <input type="file" formControlName="pictures" multiple>
+      <input id="photosURL" type="file" multiple="multiple" required (change)="fileChange($event)">
     </label>
   </div>
   <div>
-    <button type="button" (click)="dogSubmit()">Upload Dog</button>
+    <button type="button" [disabled]="!dogForm.valid" (click)="dogSubmit()">Upload Dog</button>
   </div>
 </form>

@@ -18,16 +18,19 @@ export class DogFormComponent implements OnInit {
   sizeArray = sizes
   breeds$ = this.DogStoreService.breeds$
   colors$ = this.DogStoreService.colors$
+  shelters$ = this.DogStoreService.shelters$
 
   dogForm = this.fb.group({
     name: ['', [Validators.required]],
+    shelter: ['', [Validators.required]],
+    description: ['', [Validators.required]],
     sex: ['', [Validators.required]],
     age: ['', [Validators.required]],
     size: ['', [Validators.required]],
     breed: ['', [Validators.required]],
     color: ['', [Validators.required]],
-    adoption: false,
-    pictures: ''
+    adoption: true,
+    photosURL: []
   })
 
   ngOnInit (): void {
@@ -37,9 +40,21 @@ export class DogFormComponent implements OnInit {
     if (!this.colors$.getValue().length) {
       this.DogStoreService.apiColors()
     }
+    if (!this.shelters$.getValue().length) {
+      this.DogStoreService.apiShelter()
+    }
   }
 
   dogSubmit () {
-    console.log(this.dogForm.value)
+    this.DogStoreService.addApiDogs(this.dogForm.value)
+    this.dogForm.reset()
+  }
+
+  fileChange (event) {
+    const newArray: String[] = []
+    Object.keys(event.target.files).forEach(element => {
+      newArray.push(event.target.files[element].name)
+    })
+    this.dogForm.patchValue({ photosURL: newArray })
   }
 }
