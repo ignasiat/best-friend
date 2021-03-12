@@ -30,7 +30,7 @@ export class DogFormComponent implements OnInit {
     breed: ['', [Validators.required]],
     color: ['', [Validators.required]],
     adoption: true,
-    photosURL: []
+    imagesURL: []
   })
 
   ngOnInit (): void {
@@ -55,6 +55,6 @@ export class DogFormComponent implements OnInit {
     Object.keys(event.target.files).forEach(element => {
       newArray.push(event.target.files[element].name)
     })
-    this.dogForm.patchValue({ photosURL: newArray })
+    this.dogForm.patchValue({ imagesURL: newArray })
   }
 }
