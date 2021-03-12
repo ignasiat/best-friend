@@ -1,3 +1,5 @@
+const cloudinary = require('cloudinary').v2;
+const debug = require('debug')('app');
 const Dog = require('../models/dogModel');
 require('../models/userModel');
 require('../models/breedModel');
@@ -5,11 +7,28 @@ require('../models/addressModel');
 require('../models/colorModel');
 
 function createDog(req, res) {
-  const newDog = new Dog(req.body);
+  cloudinary.config({
+    cloud_name: `${process.env.CLOUDINARY_CLOUD_NAME}`,
+    api_key: `${process.env.CLOUDINARY_API_KEY}`,
+    api_secret: `${process.env.CLOUDINARY_API_SECRET}`
+  });
+  try {
+    const newDog = new Dog(req.body);
+    newDog.photosURL = [];
 
-  newDog.save();
-
-  res.json(newDog);
+    req.body.imagesURL.forEach((image) => {
+      cloudinary.uploader.upload(`${process.env.FOLDER}${image}`,
+        (error, result) => {
+          newDog.photosURL.push(result.url);
+        });
+    });
+    setTimeout(() => {
+      newDog.save();
+      res.json(newDog);
+    }, 5000);
+  } catch (error) {
+    debug(error);
+  }
 }
 
 async function getAllDogs(req, res) {
