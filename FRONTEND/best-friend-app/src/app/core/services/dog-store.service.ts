@@ -5,6 +5,7 @@ import { DogService } from './dog.service'
 import { constants } from '../../constants/index'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
+import { User } from '../models/User'
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class DogStoreService {
   selectedDog$ = new BehaviorSubject<Dog>(null)
   breeds$ = new BehaviorSubject<Color[]>([])
   colors$ = new BehaviorSubject<Breed[]>([])
+  shelters$ = new BehaviorSubject<User[]>([])
 
   getDogs (): Dog[] {
     return this.dogs$.getValue()
@@ -34,6 +36,23 @@ export class DogStoreService {
 
   apiColors (): void {
     this.DogService.fetchColors().subscribe((answer) => this.colors$.next(answer))
+  }
+
+  apiShelter (): void {
+    this.DogService.fetchShelters().subscribe((answer) => this.shelters$.next(answer))
+  }
+
+  addApiDogs (newDog: Dog): void {
+    this.DogService.addDog(newDog).subscribe((answer) => {
+      console.log(answer)
+      if (answer.adoption) {
+        console.log('entra')
+        console.log(this.dogs$.getValue())
+        const newDogs: Dog[] = [...this.dogs$.getValue(), answer]
+        this.dogs$.next(newDogs)
+        this.dogsCopy$.next(newDogs)
+      }
+    })
   }
 
   filteredDogs (sexValue: String, ageValue: String, sizeValue:String) {

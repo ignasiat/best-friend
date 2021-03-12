@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { Dog } from '../models/Dog'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
+import { User } from '../models/User'
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,13 @@ export class DogService {
 
   fetchColors (): Observable<Color[]> {
     return this.httpClient.get<Color[]>(`${this.dogsApi}/color`)
+  }
+
+  fetchShelters (): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.dogsApi}/user/shelter`)
+  }
+
+  addDog (newDog: Dog): Observable<Dog> {
+    return this.httpClient.post<Dog>(`${this.dogsApi}/dog`, newDog)
   }
 }
