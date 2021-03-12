@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { constants } from '../../constants/index'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
-import { BehaviorSubject } from 'rxjs'
-import { Dog } from '../../core/models/Dog'
+import { sexs } from 'src/app/constants/sexs'
+import { ages } from 'src/app/constants/ages'
+import { sizes } from 'src/app/constants/sizes'
 
 @Component({
   selector: 'app-dogs',
@@ -10,9 +11,9 @@ import { Dog } from '../../core/models/Dog'
   styleUrls: ['./dogs.component.scss']
 })
 export class DogsComponent implements OnInit {
-  sexs = [constants.FEMALE, constants.MALE, constants.ANY]
-  ages = [constants.PUPPY, constants.YOUNG, constants.ADULT, constants.SENIOR, constants.ANY]
-  sizes = [constants.SMALL, constants.MEDIUM, constants.LARGE, constants.XLARGE, constants.ANY]
+  sexArray = [...sexs, constants.ANY]
+  ageArray = [...ages, constants.ANY]
+  sizeArray = [...sizes, constants.ANY]
 
   dogs$ = this.DogStoreService.dogs$
   dogsCopy$ = this.DogStoreService.dogsCopy$
@@ -29,16 +30,6 @@ export class DogsComponent implements OnInit {
   }
 
   search (sexValue: String, ageValue: String, sizeValue:String) {
-    let filtered: Dog[] = this.dogs$.getValue()
-    if (sexValue && sexValue !== constants.ANY) {
-      filtered = filtered.filter((element) => element.sex === sexValue)
-    }
-    if (ageValue && ageValue !== constants.ANY) {
-      filtered = filtered.filter((element) => element.age === ageValue)
-    }
-    if (sizeValue && sizeValue !== constants.ANY) {
-      filtered = filtered.filter((element) => element.size === sizeValue)
-    }
-    this.dogsCopy$.next(filtered)
+    this.DogStoreService.filteredDogs(sexValue, ageValue, sizeValue)
   }
 }
