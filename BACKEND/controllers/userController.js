@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 require('../models/addressModel');
+const { constants } = require('../constants');
 
 function createUser(req, res) {
   const newUser = new User(req.body);
@@ -16,6 +17,15 @@ async function getAllUsers(req, res) {
     .exec();
 
   res.json(allUsers);
+}
+
+async function getAllShelters(req, res) {
+  const allShelters = await User
+    .find({ userType: constants.SHELTER })
+    .populate('address')
+    .exec();
+
+  res.json(allShelters);
 }
 
 async function getUserById(req, res) {
@@ -49,5 +59,5 @@ async function deleteUserById(req, res) {
 }
 
 module.exports = {
-  createUser, getAllUsers, getUserById, updateUserById, deleteUserById
+  createUser, getAllUsers, getAllShelters, getUserById, updateUserById, deleteUserById
 };
