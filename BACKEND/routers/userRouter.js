@@ -11,6 +11,10 @@ function UserRouter() {
     .get(userController.getAllUsers);
 
   router
+    .route('/shelter')
+    .get(userController.getAllShelters);
+
+  router
     .route('/:userId')
     .get(userController.getUserById)
     .put(userController.updateUserById)

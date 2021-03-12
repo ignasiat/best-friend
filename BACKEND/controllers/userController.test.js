@@ -1,5 +1,5 @@
 const {
-  createUser, getAllUsers, getUserById, updateUserById, deleteUserById
+  createUser, getAllUsers, getAllShelters, getUserById, updateUserById, deleteUserById
 } = require('./userController');
 
 const User = require('../models/userModel');
@@ -34,6 +34,25 @@ describe('Given a getAllUsers function', () => {
         }));
 
       await getAllUsers(req, res);
+
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a getAllShelters function', () => {
+  describe('When is invoked', () => {
+    test('Then res.json should be invoked', async () => {
+      const req = {};
+      const res = { json: jest.fn() };
+
+      User.find
+        .mockImplementationOnce(() => ({
+          populate: jest.fn()
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
+        }));
+
+      await getAllShelters(req, res);
 
       expect(res.json).toHaveBeenCalled();
     });
