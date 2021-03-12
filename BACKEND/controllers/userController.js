@@ -21,7 +21,7 @@ async function getAllUsers(req, res) {
 
 async function getAllShelters(req, res) {
   const allShelters = await User
-    .find({ type: constants.SHELTER })
+    .find({ userType: constants.SHELTER })
     .populate('address')
     .exec();
 
