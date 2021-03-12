@@ -17,6 +17,7 @@ module.exports = {
   ],
   rules: {
     'comma-dangle': [2, 'never'],
-    'no-underscore-dangle': 0
+    'no-underscore-dangle': 0,
+    'no-useless-constructor': 0
   }
 }
