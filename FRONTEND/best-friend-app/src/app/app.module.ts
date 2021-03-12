@@ -20,8 +20,10 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
 import { DogComponent } from './pages/dog/dog.component'
 import { UserComponent } from './pages/user/user.component'
-import { DogCardComponent } from './components/dog-card/dog-card.component';
+import { DogCardComponent } from './components/dog-card/dog-card.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { ReactiveFormsModule } from '@angular/forms'
+import { DogFormComponent } from './pages/dog-form/dog-form.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     DogsComponent,
     DogComponent,
     UserComponent,
-    DogCardComponent
+    DogCardComponent,
+    DogFormComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   exports: [MatMenuModule],
   providers: [],
