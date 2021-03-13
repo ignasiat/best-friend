@@ -44,9 +44,7 @@ export class DogStoreService {
 
   addApiDogs (newDog: Dog): void {
     this.DogService.addDog(newDog).subscribe((answer) => {
-      console.log(answer)
       if (answer.adoption) {
-        console.log('entra')
         console.log(this.dogs$.getValue())
         const newDogs: Dog[] = [...this.dogs$.getValue(), answer]
         this.dogs$.next(newDogs)
