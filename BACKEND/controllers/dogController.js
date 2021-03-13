@@ -6,6 +6,22 @@ require('../models/breedModel');
 require('../models/addressModel');
 require('../models/colorModel');
 
+async function getDogById(req, res) {
+  const { dogId } = req.params;
+  const findDog = await Dog
+    .findById(dogId)
+    .populate('shelter')
+    .populate({
+      path: 'shelter',
+      populate: { path: 'address' }
+    })
+    .populate('breed')
+    .populate('color')
+    .exec();
+
+  res.json(findDog);
+}
+
 function createDog(req, res) {
   cloudinary.config({
     cloud_name: `${process.env.CLOUDINARY_CLOUD_NAME}`,
@@ -13,7 +29,7 @@ function createDog(req, res) {
     api_secret: `${process.env.CLOUDINARY_API_SECRET}`
   });
   try {
-    const newDog = new Dog(req.body);
+    let newDog = new Dog(req.body);
     newDog.photosURL = [];
 
     req.body.imagesURL.forEach((image) => {
@@ -22,9 +38,10 @@ function createDog(req, res) {
           newDog.photosURL.push(result.url);
         });
     });
-    setTimeout(() => {
-      newDog.save();
-      res.json(newDog);
+    setTimeout(async () => {
+      newDog = await newDog.save();
+      req.params.dogId = newDog._id;
+      getDogById(req, res);
     }, 5000);
   } catch (error) {
     debug(error);
@@ -44,22 +61,6 @@ async function getAllDogs(req, res) {
     .exec();
 
   res.json(allDogs);
-}
-
-async function getDogById(req, res) {
-  const { dogId } = req.params;
-  const findDog = await Dog
-    .findById(dogId)
-    .populate('shelter')
-    .populate({
-      path: 'shelter',
-      populate: { path: 'address' }
-    })
-    .populate('breed')
-    .populate('color')
-    .exec();
-
-  res.json(findDog);
 }
 
 async function getDogsByShelter(req, res) {
