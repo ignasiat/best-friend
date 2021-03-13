@@ -1,37 +1,37 @@
 export interface Dog {
-  _id: String,
-  name: String,
+  _id: string,
+  name: string,
   shelter: {
-    _id: String,
-    name: String,
+    _id: string,
+    name: string,
     address: {
-      _id: String,
-      street: String,
-      number: String,
-      city: String,
-      zipCode: String,
-      region: String
+      _id: string,
+      street: string,
+      number: string,
+      city: string,
+      zipCode: string,
+      region: string
     }
-    phone: String,
-    email: String,
-    password: String,
-    website: String,
-    information: String,
-    photoURL: String,
-    userType: String
+    phone: string,
+    email: string,
+    password: string,
+    website: string,
+    information: string,
+    photoURL: string,
+    userType: string
   },
   breed: {
-    _id: String,
-    name: String
+    _id: string,
+    name: string
   },
-  age: String,
-  sex: String,
-  size: String,
+  age: string,
+  sex: string,
+  size: string,
   color: {
-    _id: String,
-    name: String
+    _id: string,
+    name: string
   },
-  description: String,
-  photosURL: [String],
-  adoption: Boolean
+  description: string,
+  photosURL: string[],
+  adoption: boolean
 }
