@@ -14,14 +14,48 @@ jest.mock('../models/breedModel');
 jest.mock('../models/addressModel');
 jest.mock('../models/colorModel');
 
-describe('Given a createDog function', () => {
+describe('Given a getDogById function', () => {
   describe('When is invoked', () => {
-    test('Then res.json should be invoked', () => {
-      const req = { body: {} };
+    test('Then res.json should be invoked', async () => {
+      const req = { params: { dogId: 11 } };
       const res = { json: jest.fn() };
 
-      createDog(req, res);
+      Dog.findById
+        .mockImplementationOnce(() => ({
+          populate: jest.fn()
+            .mockImplementationOnce(() => ({
+              populate: jest.fn()
+                .mockImplementationOnce(() => ({
+                  populate: jest.fn()
+                    .mockImplementationOnce(() => ({
+                      populate: jest.fn()
+                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
+                    }))
+                }))
+            }))
+        }));
 
+      await getDogById(req, res);
+
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a createDog function', () => {
+  describe('When is invoked', () => {
+    test('Then res.json should be invoked', async () => {
+      const req = { body: { imagesURL: ['fake photo URL'] } };
+      const res = { json: jest.fn() };
+
+      const cloudinary = jest.genMockFromModule('cloudinary').v2;
+
+      cloudinary.uploader = jest.fn().mockImplementationOnce(() => ({
+        upload: jest.fn()
+          .mockImplementationOnce((url, callback) => callback(null, { url: '' }))
+      }));
+
+      await createDog(req, res);
       expect(res.json).toHaveBeenCalled();
     });
   });
@@ -49,34 +83,6 @@ describe('Given a getAllDogs function', () => {
         }));
 
       await getAllDogs(req, res);
-
-      expect(res.json).toHaveBeenCalled();
-    });
-  });
-});
-
-describe('Given a getDogById function', () => {
-  describe('When is invoked', () => {
-    test('Then res.json should be invoked', async () => {
-      const req = { params: { dogId: 11 } };
-      const res = { json: jest.fn() };
-
-      Dog.findById
-        .mockImplementationOnce(() => ({
-          populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
-        }));
-
-      await getDogById(req, res);
 
       expect(res.json).toHaveBeenCalled();
     });

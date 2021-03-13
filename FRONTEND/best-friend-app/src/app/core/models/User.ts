@@ -1,19 +1,20 @@
 export interface User {
-  _id: String,
-  name: String,
+  _id: string,
+  name: string,
   address: {
-    _id: String,
-    street: String,
-    number: String,
-    city: String,
-    region: String,
+    _id: string,
+    street: string,
+    number: string,
+    city: string,
+    region: string,
+    zipCode: string
   },
-  phone: String,
-  email: String,
-  password: String,
-  website: String,
-  information: String,
-  photoURL: String,
-  userType: String
+  phone: string,
+  email: string,
+  password: string,
+  website: string,
+  information: string,
+  photoURL: string,
+  userType: string
 
 }

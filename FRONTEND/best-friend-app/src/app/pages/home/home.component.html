@@ -8,7 +8,6 @@
   </div>
 
   <section>
-    <!-- <app-dog-card ></app-dog-card> -->
     <mat-card *ngFor="let dog of dogs$ | async | slice:0:6" class="example-card">    
     <app-dog-card [dog]="dog"></app-dog-card>
     </mat-card>
