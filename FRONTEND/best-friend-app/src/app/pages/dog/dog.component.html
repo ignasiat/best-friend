@@ -30,14 +30,14 @@
     </div>
     <div class="dog-data__group">
       <div class="dog-data__item">
-        <span class="item-title">Age:</span> {{selectedDog.age.toLowerCase()
+        <span class="item-title">Age:</span> {{selectedDog.age | titlecase
       }}
       </div>
       <div class="dog-data__item">
-        <span class="item-title">Sex:</span> {{selectedDog.sex.toLowerCase()}}
+        <span class="item-title">Sex:</span> {{selectedDog.sex | titlecase}}
       </div>
       <div class="dog-data__item">
-        <span class="item-title">Size:</span> {{selectedDog.size.toLowerCase()}}
+        <span class="item-title">Size:</span> {{selectedDog.size | titlecase}}
       </div>
       <div class="dog-data__item">
         <span class="item-title">Color:</span> {{selectedDog.color.name}}
