@@ -70,5 +70,5 @@ export class DogStoreService {
     this.selectedDog$.next(this.getDogs().find((element) => element._id === dogId))
   }
 
-  constructor (private DogService: DogService) { }
+  constructor (public DogService: DogService) { }
 }
