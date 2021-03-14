@@ -11,7 +11,7 @@ import { sexs } from '../../constants/sexs'
   styleUrls: ['./dog-form.component.scss']
 })
 export class DogFormComponent implements OnInit {
-  constructor (private fb: FormBuilder, private DogStoreService: DogStoreService) { }
+  constructor (private fb: FormBuilder, public DogStoreService: DogStoreService) { }
 
   sexArray = sexs
   ageArray = ages

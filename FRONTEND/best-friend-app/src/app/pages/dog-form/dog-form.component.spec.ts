@@ -5,6 +5,8 @@ import { FormBuilder } from '@angular/forms'
 
 import { DogFormComponent } from './dog-form.component'
 
+import { userMock } from '../../constants/user-mock'
+
 describe('DogFormComponent', () => {
   let component: DogFormComponent
   let fixture: ComponentFixture<DogFormComponent>
@@ -24,5 +26,54 @@ describe('DogFormComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('Method dogSubmit should call addApiDogs', () => {
+    const addApiDogsSpy = spyOn(
+      component.DogStoreService,
+      'addApiDogs')
+
+    component.dogSubmit()
+
+    expect(addApiDogsSpy).toHaveBeenCalled()
+  })
+
+  it('Method fileChange should call dogForm.patchValue', () => {
+    const event = { target: { files: ['fake file'] } }
+    const patchValueSpy = spyOn(component.dogForm, 'patchValue')
+
+    component.fileChange(event)
+
+    expect(patchValueSpy).toHaveBeenCalled()
+  })
+
+  it('Should not called apiBreed onInit if breeds$ have values', () => {
+    component.breeds$.next([{ _id: '1', name: 'fake breed' }])
+
+    const apiBreedsSpy = spyOn(component.DogStoreService, 'apiBreeds')
+
+    component.ngOnInit()
+
+    expect(apiBreedsSpy).not.toHaveBeenCalled()
+  })
+
+  it('Should not called apiColor onInit if colors$ have values', () => {
+    component.colors$.next([{ _id: '1', name: 'fake color' }])
+
+    const apiColorsSpy = spyOn(component.DogStoreService, 'apiColors')
+
+    component.ngOnInit()
+
+    expect(apiColorsSpy).not.toHaveBeenCalled()
+  })
+
+  it('Should not called apiShelter onInit if shelters$ have values', () => {
+    component.shelters$.next([userMock])
+
+    const apiShelterSpy = spyOn(component.DogStoreService, 'apiShelter')
+
+    component.ngOnInit()
+
+    expect(apiShelterSpy).not.toHaveBeenCalled()
   })
 })
