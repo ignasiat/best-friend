@@ -18,7 +18,7 @@ export class DogsComponent implements OnInit {
   dogs$ = this.DogStoreService.dogs$
   dogsCopy$ = this.DogStoreService.dogsCopy$
 
-  constructor (private DogStoreService: DogStoreService) {
+  constructor (public DogStoreService: DogStoreService) {
 
   }
 
