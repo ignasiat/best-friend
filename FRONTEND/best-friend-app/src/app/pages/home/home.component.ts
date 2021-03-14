@@ -9,7 +9,7 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
 export class HomeComponent implements OnInit {
   dogs$ = this.DogStoreService.dogs$
 
-  constructor (private DogStoreService: DogStoreService) {
+  constructor (public DogStoreService: DogStoreService) {
 
   }
 
