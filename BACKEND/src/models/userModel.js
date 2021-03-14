@@ -1,4 +1,5 @@
 const { model, Schema } = require('mongoose');
+const md5 = require('md5');
 
 const userSchema = new Schema({
   name: String,
@@ -11,5 +12,9 @@ const userSchema = new Schema({
   photoURL: String,
   userType: String
 });
+
+userSchema.methods.validPassword = function validPassword(pwd) {
+  return this.password === md5(pwd);
+};
 
 module.exports = model('User', userSchema);
