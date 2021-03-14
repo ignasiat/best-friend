@@ -21,23 +21,21 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  res.status(200);
-  res.json(req.body);
+  res.redirect('/api/dog');
 }
 
 function logout(req, res) {
   req.logout();
-  res.status(200);
-  res.send('Logout');
+  res.redirect('/api/dog');
 }
 
 function test(req, res) {
   if (req.isAuthenticated()) {
     res.status(200);
-    res.send('Test works');
+    res.send(req.user);
   } else {
     res.status(401);
-    res.send('No puedes entra');
+    res.send('Don\'t authorize');
   }
 }
 
