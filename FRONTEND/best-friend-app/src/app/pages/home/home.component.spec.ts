@@ -6,6 +6,8 @@ import { HomeComponent } from './home.component'
 
 import { dogMock } from '../../constants/dog-mock'
 
+import { DebugElement } from '@angular/core'
+
 describe('HomeComponent', () => {
   let component: HomeComponent
   let fixture: ComponentFixture<HomeComponent>
@@ -34,5 +36,11 @@ describe('HomeComponent', () => {
     component.ngOnInit()
 
     expect(apiDogsSpy).not.toHaveBeenCalled()
+  })
+  it('Should render a title with value "Find your best friend!"', () => {
+    const bannerDe: DebugElement = fixture.debugElement
+    const bannerEl: HTMLElement = bannerDe.nativeElement
+    const h1 = bannerEl.querySelector('h1')
+    expect(h1.textContent).toEqual('Find your best friend!')
   })
 })

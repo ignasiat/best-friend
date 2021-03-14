@@ -7,6 +7,8 @@ import { DogFormComponent } from './dog-form.component'
 
 import { userMock } from '../../constants/user-mock'
 
+import { DebugElement } from '@angular/core'
+
 describe('DogFormComponent', () => {
   let component: DogFormComponent
   let fixture: ComponentFixture<DogFormComponent>
@@ -75,5 +77,11 @@ describe('DogFormComponent', () => {
     component.ngOnInit()
 
     expect(apiShelterSpy).not.toHaveBeenCalled()
+  })
+  it('Should render a button with value "Upload Dog"', () => {
+    const bannerDe: DebugElement = fixture.debugElement
+    const bannerEl: HTMLElement = bannerDe.nativeElement
+    const button = bannerEl.querySelector('button')
+    expect(button.textContent).toEqual('Upload Dog')
   })
 })
