@@ -4,6 +4,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 import { HomeComponent } from './home.component'
 
+import { dogMock } from '../../constants/dog-mock'
+
+import { DebugElement } from '@angular/core'
+
 describe('HomeComponent', () => {
   let component: HomeComponent
   let fixture: ComponentFixture<HomeComponent>
@@ -23,5 +27,20 @@ describe('HomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('Should not call apiDogs onInit when dogs$ has values', () => {
+    component.dogs$.next([dogMock])
+    const apiDogsSpy = spyOn(component.DogStoreService, 'apiDogs')
+
+    component.ngOnInit()
+
+    expect(apiDogsSpy).not.toHaveBeenCalled()
+  })
+  it('Should render a title with value "Find your best friend!"', () => {
+    const bannerDe: DebugElement = fixture.debugElement
+    const bannerEl: HTMLElement = bannerDe.nativeElement
+    const h1 = bannerEl.querySelector('h1')
+    expect(h1.textContent).toEqual('Find your best friend!')
   })
 })
