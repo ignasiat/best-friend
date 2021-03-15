@@ -12,7 +12,7 @@ function register(req, res) {
     user.save();
 
     req.login(user, () => {
-      res.redirect('/api/dog');
+      res.json(user);
     });
   } catch (error) {
     res.status(500);
@@ -21,7 +21,7 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  res.redirect('/api/dog');
+  res.json(req.user);
 }
 
 function logout(req, res) {

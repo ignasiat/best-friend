@@ -1,3 +1,4 @@
+const cloudinary = require('cloudinary').v2;
 const {
   createDog, getAllDogs, getDogById, getDogsByShelter, updateDogById, deleteDogById
 } = require('./dogController');
@@ -48,11 +49,9 @@ describe('Given a createDog function', () => {
       const req = { body: { imagesURL: ['fake photo URL'] } };
       const res = { json: jest.fn() };
 
-      const cloudinary = jest.genMockFromModule('cloudinary').v2;
-
       cloudinary.uploader = jest.fn().mockImplementationOnce(() => ({
         upload: jest.fn()
-          .mockImplementationOnce((url, callback) => callback(null, { url: '' }))
+          .mockImplementationOnce((url, callback) => callback(false, { result: { url: '' } }))
       }));
 
       await createDog(req, res);
