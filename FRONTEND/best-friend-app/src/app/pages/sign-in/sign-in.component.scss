@@ -1,0 +1,34 @@
+@import '../../../styles/colors';
+@import '../../../styles/title';
+
+.signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  mat-form-field {
+    width: 300px;
+    margin: 10px;
+  }
+  button {
+    font-size: 20px;
+    background-color: $color-primary;
+    color: #fff;
+  }
+  button:disabled {
+    opacity: 0.4;
+  }
+}
+
+@media only screen and (min-width: 988px) {
+  .signin {
+    font-size: 18px;
+    mat-form-field {
+      width: 450px;
+      margin: 20px;
+    } 
+  }
+  button {
+    font-size: 24px;
+  }
+}

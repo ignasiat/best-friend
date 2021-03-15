@@ -23,29 +23,36 @@ async function getDogById(req, res) {
 }
 
 function createDog(req, res) {
+  debug('Create dog');
+  debug(req.body.imagesURL);
   cloudinary.config({
     cloud_name: `${process.env.CLOUDINARY_CLOUD_NAME}`,
     api_key: `${process.env.CLOUDINARY_API_KEY}`,
     api_secret: `${process.env.CLOUDINARY_API_SECRET}`
   });
-  try {
-    let newDog = new Dog(req.body);
-    newDog.photosURL = [];
 
-    req.body.imagesURL.forEach((image) => {
-      cloudinary.uploader.upload(`${process.env.FOLDER}${image}`,
-        (error, result) => {
-          newDog.photosURL.push(result.url);
-        });
+  const newDog = new Dog(req.body);
+  newDog.photosURL = [];
+
+  // dog_promises will be an array of promises
+  const dogPromises = req.body.imagesURL.map((file) => new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(`${process.env.FOLDER}${file}`, (error, result) => {
+      if (error) { reject(error); } else { newDog.photosURL.push(result.url); resolve(result); }
     });
-    setTimeout(async () => {
-      newDog = await newDog.save();
-      req.params.dogId = newDog._id;
-      getDogById(req, res);
-    }, 5000);
-  } catch (error) {
-    debug(error);
-  }
+  }));
+  // Promise.all will fire when all promises are resolved
+  Promise.all(dogPromises)
+    .then(() => {
+      newDog.save((err) => {
+        if (err) {
+          res.status(500);
+          res.json(err);
+        }
+        req.params.dogId = newDog._id;
+        getDogById(req, res);
+      });
+    })
+    .catch((error) => { debug('Error'); res.json(error); });
 }
 
 async function getAllDogs(req, res) {

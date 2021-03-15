@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="mobileMenu()">
         <mat-icon>account_circle</mat-icon>
         <span>User Info</span>
       </button>
@@ -30,9 +30,15 @@
           <span>About Us</span>
       </a>
       </button>
-      <button mat-menu-item>
-        <mat-icon>login</mat-icon>
-        <span>Log In</span>
+      <button *ngIf="!this.userLogged" mat-menu-item>
+        <a routerLink="/signin">
+          <mat-icon>login</mat-icon>
+          <span>Sign In</span>
+        </a>
+      </button>
+      <button *ngIf="this.userLogged" mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sign Out</span>
       </button>
     </mat-menu>
     <form class="example-form">
@@ -41,7 +47,16 @@
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
-    <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+    <div *ngIf="!this.userLogged">
+      <a routerLink="/signin">
+        <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+      </a>
+    </div>
+    <div *ngIf="this.userLogged">
+      <a [routerLink]='["/user", this.userLogged._id]'>
+        <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
+      </a>
+    </div>
   </mat-toolbar>
 </nav>
 
@@ -61,5 +76,14 @@
     </mat-form-field>
   </form>
   <div class="nav__spacer"></div>
-  <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+  <div *ngIf="!this.userLogged">
+    <a routerLink="/signin">
+      <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+    </a>
+  </div>
+  <div *ngIf="this.userLogged">
+    <a [routerLink]='["/user", this.userLogged._id]'>
+      <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
+    </a>
+  </div>
 </nav>

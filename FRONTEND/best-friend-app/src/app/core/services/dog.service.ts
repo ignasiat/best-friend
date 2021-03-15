@@ -5,6 +5,7 @@ import { Dog } from '../models/Dog'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
+import { SignIn } from '../models/SignIn'
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,13 @@ export class DogService {
 
   addDog (newDog: Dog): Observable<Dog> {
     return this.httpClient.post<Dog>(`${this.dogsApi}/dog`, newDog)
+  }
+
+  signIn (signInData: SignIn): Observable<User> {
+    return this.httpClient.post<User>(`${this.dogsApi}/auth/login`, signInData)
+  }
+
+  signOut (): Observable<Dog[]> {
+    return this.httpClient.get<Dog[]>(`${this.dogsApi}/auth/logout`)
   }
 }
