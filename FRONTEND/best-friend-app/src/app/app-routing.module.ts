@@ -4,6 +4,7 @@ import { DogFormComponent } from './pages/dog-form/dog-form.component'
 import { DogComponent } from './pages/dog/dog.component'
 import { DogsComponent } from './pages/dogs/dogs.component'
 import { HomeComponent } from './pages/home/home.component'
+import { SignInComponent } from './pages/sign-in/sign-in.component'
 import { UserComponent } from './pages/user/user.component'
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'dogs', component: DogsComponent },
   { path: 'dog/:dogId', component: DogComponent },
   { path: 'user/:userId', component: UserComponent },
-  { path: 'form', component: DogFormComponent }
+  { path: 'form', component: DogFormComponent },
+  { path: 'signin', component: SignInComponent }
 ]
 
 @NgModule({
