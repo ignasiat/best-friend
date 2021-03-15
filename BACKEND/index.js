@@ -35,6 +35,6 @@ app.use('/api/user', userRouter);
 app.use('/api/dog', dogRouter);
 app.use('/api/breed', breedRouter);
 app.use('/api/color', colorRouter);
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(port, () => debug(`Server running in ${chalk.green(port)}`));
