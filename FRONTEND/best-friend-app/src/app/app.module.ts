@@ -23,7 +23,8 @@ import { UserComponent } from './pages/user/user.component'
 import { DogCardComponent } from './components/dog-card/dog-card.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { ReactiveFormsModule } from '@angular/forms'
-import { DogFormComponent } from './pages/dog-form/dog-form.component'
+import { DogFormComponent } from './pages/dog-form/dog-form.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DogFormComponent } from './pages/dog-form/dog-form.component'
     DogComponent,
     UserComponent,
     DogCardComponent,
-    DogFormComponent
+    DogFormComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
