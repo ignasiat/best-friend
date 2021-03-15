@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, of } from 'rxjs'
 import { Dog } from '../models/Dog'
 import { DogService } from './dog.service'
 import { constants } from '../../constants/index'
@@ -7,6 +7,7 @@ import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
+import { tap, catchError } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -72,8 +73,8 @@ export class DogStoreService {
     this.selectedDog$.next(this.getDogs().find((element) => element._id === dogId))
   }
 
-  apiSignIn (signData: SignIn): void {
-    this.DogService.signIn(signData).subscribe((answer) => { console.log(answer); this.userLogged$.next(answer) })
+  apiSignIn (signData: SignIn) {
+    return this.DogService.signIn(signData).pipe(tap((answer) => this.userLogged$.next(answer)), catchError((error) => of(error)))
   }
 
   apiSignOut () : void {

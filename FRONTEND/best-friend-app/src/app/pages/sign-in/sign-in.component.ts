@@ -11,7 +11,7 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
 export class SignInComponent implements OnInit {
   constructor (private fb: FormBuilder, private DogStoreService: DogStoreService, private router: Router) { }
 
-  userLogged$ = this.DogStoreService.userLogged$
+  userLogged$
 
   ngOnInit (): void {
   }
@@ -22,10 +22,10 @@ export class SignInComponent implements OnInit {
   })
 
   signIn () {
-    this.DogStoreService.apiSignIn(this.signInForm.value)
-    this.userLogged$.subscribe((answer) => {
-      if (answer) {
-        this.router.navigate(['/user/', answer._id])
+    this.DogStoreService.apiSignIn(this.signInForm.value).subscribe((element) => {
+      this.userLogged$ = element
+      if (element) {
+        this.router.navigate(['/user/', element._id])
       }
     })
   }
