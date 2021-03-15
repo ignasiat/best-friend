@@ -6,6 +6,7 @@ import { constants } from '../../constants/index'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
+import { SignIn } from '../models/SignIn'
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class DogStoreService {
   breeds$ = new BehaviorSubject<Color[]>([])
   colors$ = new BehaviorSubject<Breed[]>([])
   shelters$ = new BehaviorSubject<User[]>([])
+  userLogged$ = new BehaviorSubject<User>(null)
 
   getDogs (): Dog[] {
     return this.dogs$.getValue()
@@ -68,6 +70,14 @@ export class DogStoreService {
 
   getSelectedDog (dogId): void {
     this.selectedDog$.next(this.getDogs().find((element) => element._id === dogId))
+  }
+
+  apiSignIn (signData: SignIn): void {
+    this.DogService.signIn(signData).subscribe((answer) => { console.log(answer); this.userLogged$.next(answer) })
+  }
+
+  apiSignOut () : void {
+    this.DogService.signOut().subscribe(() => this.userLogged$.next(null))
   }
 
   constructor (public DogService: DogService) { }
