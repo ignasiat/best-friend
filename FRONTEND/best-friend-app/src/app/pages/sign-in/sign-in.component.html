@@ -1,0 +1,20 @@
+<main>
+  <h1>Sign In</h1>
+  <form [formGroup]="signInForm">
+    <div class="signin">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email">
+        <mat-error *ngIf="this.signInForm.controls['email'].invalid">Wrong Email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput placeholder="password" formControlName="password" type="password">
+        <mat-error *ngIf="this.signInForm.controls['password'].invalid">Wrong password</mat-error>
+      </mat-form-field>
+      <div class="btn">
+        <button mat-button color="primary" type="button" [disabled]="!signInForm.valid" (click)="signIn()">Sign In</button>
+      </div>
+    </div>
+  </form>
+</main>
