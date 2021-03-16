@@ -53,7 +53,7 @@
       </a>
     </div>
     <div *ngIf="this.userLogged">
-      <a [routerLink]='["/user", this.userLogged._id]'>
+      <a [routerLink]='["/profile"]'>
         <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
       </a>
     </div>
@@ -82,7 +82,7 @@
     </a>
   </div>
   <div *ngIf="this.userLogged">
-    <a [routerLink]='["/user", this.userLogged._id]'>
+    <a [routerLink]='["/profile"]'>
       <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
     </a>
   </div>
