@@ -23,8 +23,11 @@ import { UserComponent } from './pages/user/user.component'
 import { DogCardComponent } from './components/dog-card/dog-card.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { ReactiveFormsModule } from '@angular/forms'
-import { DogFormComponent } from './pages/dog-form/dog-form.component';
+import { DogFormComponent } from './pages/dog-form/dog-form.component'
 import { SignInComponent } from './pages/sign-in/sign-in.component'
+import { ProfileComponent } from './pages/profile/profile.component';
+import { PopupComponent } from './pages/sign-in/popup/popup.component';
+import { UserCardComponent } from './components/user-card/user-card.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { SignInComponent } from './pages/sign-in/sign-in.component'
     UserComponent,
     DogCardComponent,
     DogFormComponent,
-    SignInComponent
+    SignInComponent,
+    ProfileComponent,
+    PopupComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,
