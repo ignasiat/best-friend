@@ -7,7 +7,7 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  dogs$ = this.DogStoreService.dogs$
+  dogs$ = this.DogStoreService.dogsAdoption$
 
   constructor (public DogStoreService: DogStoreService) {
 
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit (): void {
     if (!this.dogs$.getValue().length) {
-      this.DogStoreService.apiDogs()
+      this.DogStoreService.apiDogsAdoption()
     }
   }
 }
