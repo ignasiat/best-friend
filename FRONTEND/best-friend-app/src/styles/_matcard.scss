@@ -1,0 +1,10 @@
+section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .example-card {
+    max-width: 400px;
+    border-radius: 20px;
+    margin: 15px;
+  }
+}

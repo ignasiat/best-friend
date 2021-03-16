@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { PopupComponent } from './popup/popup.component'
 
 @Component({
   selector: 'app-sign-in',
@@ -9,9 +11,9 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  constructor (private fb: FormBuilder, private DogStoreService: DogStoreService, private router: Router) { }
+  constructor (private fb: FormBuilder, private DogStoreService: DogStoreService, private router: Router, private modalService: NgbModal) { }
 
-  userLogged$ = this.DogStoreService.userLogged$
+  userLogged$
 
   ngOnInit (): void {
   }
@@ -22,11 +24,11 @@ export class SignInComponent implements OnInit {
   })
 
   signIn () {
-    this.DogStoreService.apiSignIn(this.signInForm.value)
-    this.userLogged$.subscribe((answer) => {
-      if (answer) {
-        this.router.navigate(['/user/', answer._id])
+    this.DogStoreService.apiSignIn(this.signInForm.value).subscribe((element) => {
+      this.userLogged$ = element
+      if (element) {
+        this.router.navigate(['/profile'])
       }
-    })
+    }, () => { this.modalService.open(PopupComponent) })
   }
 }

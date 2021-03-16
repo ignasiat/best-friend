@@ -1,0 +1,28 @@
+<section>
+  <div class="data">
+    <div class="photo__item">
+      <img src={{user.photoURL}} alt={{user.name}} />
+    </div>
+    <h1>Profile</h1>
+    <div class="data__item">
+      <span class="data__title">Name: </span>{{user.name}}
+    </div>
+    <div class="data__item">
+      <span class="data__title">Information: </span>{{user.information}}
+    </div>
+    <div class="data__item">
+      <span class="data__title">Phone: </span>{{user.phone}}
+    </div>
+    <div class="data__item">
+      <span class="data__title">Website: </span>{{user.website}}
+    </div>
+    <div class="data__item">
+      <span class="data__title">Address: </span> 
+        {{user.address.street}}
+        {{user.address.number}}
+        {{user.address.zipCode}}
+        {{user.address.city}}
+        {{user.address.region}}
+    </div>
+  </div>
+</section>

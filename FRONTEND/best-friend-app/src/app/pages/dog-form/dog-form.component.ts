@@ -16,9 +16,9 @@ export class DogFormComponent implements OnInit {
   sexArray = sexs
   ageArray = ages
   sizeArray = sizes
-  breeds$ = this.DogStoreService.breeds$
-  colors$ = this.DogStoreService.colors$
-  shelters$ = this.DogStoreService.shelters$
+  breeds$ = this.DogStoreService.apiBreeds()
+  colors$ = this.DogStoreService.apiColors()
+  shelters$ = this.DogStoreService.apiShelter()
 
   dogForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -34,15 +34,6 @@ export class DogFormComponent implements OnInit {
   })
 
   ngOnInit (): void {
-    if (!this.breeds$.getValue().length) {
-      this.DogStoreService.apiBreeds()
-    }
-    if (!this.colors$.getValue().length) {
-      this.DogStoreService.apiColors()
-    }
-    if (!this.shelters$.getValue().length) {
-      this.DogStoreService.apiShelter()
-    }
   }
 
   dogSubmit () {

@@ -1,7 +1,7 @@
 <main>
-  <div *ngIf="selectedshelter">
-    <app-user-card [user]="selectedshelter"></app-user-card>
-  </div>
+  <section *ngIf="userLogged">
+    <app-user-card [user]="userLogged"></app-user-card>
+  </section>
   <section>
     <mat-card *ngFor="let dog of ourDogs$ | async" class="example-card">
       <app-dog-card [dog]="dog"></app-dog-card>

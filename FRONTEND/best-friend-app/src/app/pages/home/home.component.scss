@@ -1,6 +1,7 @@
 @import "../../../styles/colors";
 @import "../../../styles/links";
 @import "../../../styles/title";
+@import "../../../styles/matcard";
 
 main {
   font-family: Montserrat;
@@ -37,17 +38,6 @@ main {
           font-weight: 400;
         }
       }
-    }
-  }
- 
-  section {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    .example-card {
-      max-width: 400px;
-      border-radius: 20px;
-      margin: 15px;
     }
   }
 }

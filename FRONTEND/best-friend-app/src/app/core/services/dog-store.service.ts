@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { Dog } from '../models/Dog'
 import { DogService } from './dog.service'
 import { constants } from '../../constants/index'
@@ -7,55 +7,56 @@ import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
+import { map, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogStoreService {
-  dogs$ = new BehaviorSubject<Dog[]>([])
-  dogsCopy$ = new BehaviorSubject<Dog[]>([])
+  dogsAdoption$ = new BehaviorSubject<Dog[]>([])
+  dogsAdoptionCopy$ = new BehaviorSubject<Dog[]>([])
   selectedDog$ = new BehaviorSubject<Dog>(null)
-  breeds$ = new BehaviorSubject<Color[]>([])
-  colors$ = new BehaviorSubject<Breed[]>([])
-  shelters$ = new BehaviorSubject<User[]>([])
   userLogged$ = new BehaviorSubject<User>(null)
 
-  getDogs (): Dog[] {
-    return this.dogs$.getValue()
-  }
-
-  apiDogs (): void {
-    this.DogService.fetchDogs().subscribe((answer) => {
-      answer = answer.filter(dog => dog.adoption)
-      this.dogs$.next(answer)
-      this.dogsCopy$.next(answer)
+  apiDogsAdoption (): void {
+    this.DogService.fetchDogs().pipe(
+      map(dogs =>
+        dogs.filter(dog => dog.adoption === true))).subscribe((answer) => {
+      this.dogsAdoption$.next(answer)
+      this.dogsAdoptionCopy$.next(answer)
     })
   }
 
-  apiBreeds (): void {
-    this.DogService.fetchBreeds().subscribe((answer) => this.breeds$.next(answer))
+  apiDogsUser (userId: String): Observable<Dog[]> {
+    return this.DogService.fetchDogs().pipe(
+      map(dogs =>
+        dogs.filter(dog => dog.shelter._id === userId)))
   }
 
-  apiColors (): void {
-    this.DogService.fetchColors().subscribe((answer) => this.colors$.next(answer))
+  apiBreeds (): Observable<Breed[]> {
+    return this.DogService.fetchBreeds()
   }
 
-  apiShelter (): void {
-    this.DogService.fetchShelters().subscribe((answer) => this.shelters$.next(answer))
+  apiColors (): Observable<Color[]> {
+    return this.DogService.fetchColors()
+  }
+
+  apiShelter (): Observable<any> {
+    return this.DogService.fetchShelters()
   }
 
   addApiDogs (newDog: Dog): void {
     this.DogService.addDog(newDog).subscribe((answer) => {
       if (answer.adoption) {
-        const newDogs: Dog[] = [...this.getDogs(), answer]
-        this.dogs$.next(newDogs)
-        this.dogsCopy$.next(newDogs)
+        const newDogs: Dog[] = [...this.dogsAdoption$.getValue(), answer]
+        this.dogsAdoption$.next(newDogs)
+        this.dogsAdoptionCopy$.next(newDogs)
       }
     })
   }
 
   filteredDogs (sexValue: String, ageValue: String, sizeValue:String) {
-    let filtered: Dog[] = this.dogs$.getValue()
+    let filtered: Dog[] = this.dogsAdoption$.getValue()
     if (sexValue && sexValue !== constants.ANY) {
       filtered = filtered.filter((element) => element.sex === sexValue)
     }
@@ -65,15 +66,16 @@ export class DogStoreService {
     if (sizeValue && sizeValue !== constants.ANY) {
       filtered = filtered.filter((element) => element.size === sizeValue)
     }
-    this.dogsCopy$.next(filtered)
+    this.dogsAdoptionCopy$.next(filtered)
   }
 
   getSelectedDog (dogId): void {
-    this.selectedDog$.next(this.getDogs().find((element) => element._id === dogId))
+    this.selectedDog$.next(this.dogsAdoption$.getValue().find((element) => element._id === dogId))
   }
 
-  apiSignIn (signData: SignIn): void {
-    this.DogService.signIn(signData).subscribe((answer) => { console.log(answer); this.userLogged$.next(answer) })
+  apiSignIn (signData: SignIn) {
+    return this.DogService.signIn(signData)
+      .pipe(tap((answer) => { this.userLogged$.next(answer) }))
   }
 
   apiSignOut () : void {
