@@ -1,1 +1,10 @@
-<p>user works! {{id}}</p>
+<main>
+  <div *ngIf="selectedshelter">
+    <app-user-card [user]="selectedshelter"></app-user-card>
+  </div>
+  <section>
+    <mat-card *ngFor="let dog of ourDogs$ | async" class="example-card">
+      <app-dog-card [dog]="dog"></app-dog-card>
+    </mat-card>
+  </section>
+</main>
