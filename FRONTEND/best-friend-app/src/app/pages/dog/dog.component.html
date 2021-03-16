@@ -19,6 +19,16 @@
           <img [src]="selectedDog.photosURL[2]"  alt="selectedDog.name">
         </div>
       </ng-template>
+      <ng-template ngbSlide *ngIf="selectedDog.photosURL[3]">
+        <div class="wrapper">
+          <img [src]="selectedDog.photosURL[3]"  alt="selectedDog.name">
+        </div>
+      </ng-template>
+      <ng-template ngbSlide *ngIf="selectedDog.photosURL[4]">
+        <div class="wrapper">
+          <img [src]="selectedDog.photosURL[4]"  alt="selectedDog.name">
+        </div>
+      </ng-template>
     </ngb-carousel>
   </div>
   <div class="dog-data">
