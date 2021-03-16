@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, of } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { Dog } from '../models/Dog'
 import { DogService } from './dog.service'
 import { constants } from '../../constants/index'
@@ -7,7 +7,7 @@ import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
-import { tap, catchError } from 'rxjs/operators'
+import { tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
