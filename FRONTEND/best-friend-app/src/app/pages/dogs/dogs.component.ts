@@ -15,8 +15,8 @@ export class DogsComponent implements OnInit {
   ageArray = [...ages, constants.ANY]
   sizeArray = [...sizes, constants.ANY]
 
-  dogs$ = this.DogStoreService.dogs$
-  dogsCopy$ = this.DogStoreService.dogsCopy$
+  dogs$ = this.DogStoreService.dogsAdoption$
+  dogsCopy$ = this.DogStoreService.dogsAdoptionCopy$
 
   constructor (public DogStoreService: DogStoreService) {
 
@@ -24,9 +24,8 @@ export class DogsComponent implements OnInit {
 
   ngOnInit (): void {
     if (!this.dogs$.getValue().length) {
-      this.DogStoreService.apiDogs()
+      this.DogStoreService.apiDogsAdoption()
     }
-    this.dogsCopy$.next(this.dogs$.getValue())
   }
 
   search (sexValue: String, ageValue: String, sizeValue:String) {
