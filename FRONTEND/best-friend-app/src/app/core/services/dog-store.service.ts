@@ -74,7 +74,8 @@ export class DogStoreService {
   }
 
   apiSignIn (signData: SignIn) {
-    return this.DogService.signIn(signData).pipe(tap((answer) => this.userLogged$.next(answer)), catchError((error) => of(error)))
+    return this.DogService.signIn(signData)
+      .pipe(tap((answer) => this.userLogged$.next(answer)))
   }
 
   apiSignOut () : void {
