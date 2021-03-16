@@ -1,5 +1,6 @@
 const md5 = require('md5');
 const User = require('../models/userModel');
+const userController = require('./userController');
 
 function register(req, res) {
   const { email, password } = req.body;
@@ -21,7 +22,8 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  res.json(req.user);
+  req.params.userId = req.user._id;
+  userController.getUserById(req, res);
 }
 
 function logout(req, res) {
