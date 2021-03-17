@@ -13,7 +13,11 @@ export class DogComponent implements OnInit {
   id = this.activatedRoute.snapshot.params.dogId
   selectedDog$ = this.DogStoreService.selectedDog$
 
-  constructor (private activatedRoute: ActivatedRoute, private DogStoreService: DogStoreService, config: NgbCarouselConfig) {
+  constructor (
+  private activatedRoute: ActivatedRoute,
+  private DogStoreService: DogStoreService,
+  config: NgbCarouselConfig
+  ) {
     config.interval = 2000
     config.keyboard = true
     config.pauseOnHover = true

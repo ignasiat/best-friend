@@ -16,6 +16,5 @@ export class HomeComponent {
 
   constructor (
     public DogStoreService: DogStoreService
-  ) {
-  }
+  ) {}
 }

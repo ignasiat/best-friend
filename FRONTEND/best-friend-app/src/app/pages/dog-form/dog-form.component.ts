@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ages } from 'src/app/constants/ages'
@@ -11,12 +11,12 @@ import { sexs } from '../../constants/sexs'
   templateUrl: './dog-form.component.html',
   styleUrls: ['./dog-form.component.scss']
 })
-export class DogFormComponent implements OnInit {
+export class DogFormComponent {
   constructor (
     private fb: FormBuilder,
     public DogStoreService: DogStoreService,
     private router: Router
-  ) { }
+  ) {}
 
   sexArray = sexs
   ageArray = ages
@@ -38,9 +38,6 @@ export class DogFormComponent implements OnInit {
     adoption: true,
     imagesURL: []
   })
-
-  ngOnInit (): void {
-  }
 
   dogSubmit () {
     this.DogStoreService.addApiDogs(this.dogForm.value).subscribe((newDog) => this.router.navigate(['/dog', newDog._id]))

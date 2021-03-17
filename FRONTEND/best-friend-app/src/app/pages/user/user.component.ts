@@ -11,7 +11,10 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
 export class UserComponent {
   id = this.activatedRoute.snapshot.params.userId
 
-  constructor (private activatedRoute: ActivatedRoute, private DogStoreService: DogStoreService) { }
+  constructor (
+    private activatedRoute: ActivatedRoute,
+    private DogStoreService: DogStoreService
+  ) {}
 
   selectedshelter$ = this.DogStoreService.apiShelter()
     .pipe(
