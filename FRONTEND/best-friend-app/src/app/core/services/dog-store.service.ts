@@ -8,6 +8,7 @@ import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
 import { map, tap } from 'rxjs/operators'
+import { dogMock } from 'src/app/constants/dog-mock'
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,16 @@ export class DogStoreService {
   selectedDog$ = new BehaviorSubject<Dog>(null)
   userLogged$ = new BehaviorSubject<User>(null)
 
-  apiDogsAdoption (): void {
-    this.DogService.fetchDogs().pipe(
-      map(dogs =>
-        dogs.filter(dog => dog.adoption === true))).subscribe((answer) => {
-      this.dogsAdoption$.next(answer)
-      this.dogsAdoptionCopy$.next(answer)
-    })
+  apiDogsAdoption (): Observable<Dog[]> {
+    return this.DogService.fetchDogs()
+      .pipe(
+        map(dogs =>
+          dogs.filter(dog => dog.adoption === true)),
+        tap((answer) => {
+          this.dogsAdoption$.next(answer)
+          this.dogsAdoptionCopy$.next(answer)
+        })
+      )
   }
 
   apiDogsUser (userId: String): Observable<Dog[]> {
@@ -45,14 +49,16 @@ export class DogStoreService {
     return this.DogService.fetchShelters()
   }
 
-  addApiDogs (newDog: Dog): void {
-    this.DogService.addDog(newDog).subscribe((answer) => {
-      if (answer.adoption) {
-        const newDogs: Dog[] = [...this.dogsAdoption$.getValue(), answer]
-        this.dogsAdoption$.next(newDogs)
-        this.dogsAdoptionCopy$.next(newDogs)
-      }
-    })
+  addApiDogs (newDog: Dog): Observable<Dog> {
+    return this.DogService.addDog(newDog)
+      .pipe(
+        tap(dog => {
+          if (dog.adoption) {
+            const newDogs: Dog[] = [...this.dogsAdoption$.getValue(), dog]
+            this.dogsAdoption$.next(newDogs)
+            this.dogsAdoptionCopy$.next(newDogs)
+          }
+        }))
   }
 
   filteredDogs (sexValue: String, ageValue: String, sizeValue:String) {

@@ -15,8 +15,11 @@ main {
     width: 270px;
     margin: 5px 10px;
   }
-  input[type=file] {
+  .file__custom {
     width: 200px;
+    input[type=file] {
+      display: none;
+    }
   }
   input[type=checkbox] {
     margin: 0px 10px 0px 20px;

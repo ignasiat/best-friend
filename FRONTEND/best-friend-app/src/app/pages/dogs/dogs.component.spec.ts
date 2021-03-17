@@ -40,7 +40,7 @@ describe('DogsComponent', () => {
 
   it('Should not call apiDogs onInit when dogs$ has values', () => {
     component.dogs$.next([dogMock])
-    const apiDogsSpy = spyOn(component.DogStoreService, 'apiDogs')
+    const apiDogsSpy = spyOn(component.DogStoreService, 'apiDogsAdoption')
 
     component.ngOnInit()
 

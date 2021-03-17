@@ -29,14 +29,6 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('Should not call apiDogs onInit when dogs$ has values', () => {
-    component.dogs$.next([dogMock])
-    const apiDogsSpy = spyOn(component.DogStoreService, 'apiDogs')
-
-    component.ngOnInit()
-
-    expect(apiDogsSpy).not.toHaveBeenCalled()
-  })
   it('Should render a title with value "Find your best friend!"', () => {
     const bannerDe: DebugElement = fixture.debugElement
     const bannerEl: HTMLElement = bannerDe.nativeElement

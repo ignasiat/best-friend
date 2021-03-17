@@ -24,7 +24,7 @@ export class DogsComponent implements OnInit {
 
   ngOnInit (): void {
     if (!this.dogs$.getValue().length) {
-      this.DogStoreService.apiDogsAdoption()
+      this.DogStoreService.apiDogsAdoption().subscribe()
     }
   }
 

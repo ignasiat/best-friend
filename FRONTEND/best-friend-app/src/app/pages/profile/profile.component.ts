@@ -1,27 +1,37 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { Observable } from 'rxjs'
-import { Dog } from '../../core/models/Dog'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
+import { filter, switchMap, tap } from 'rxjs/operators'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
-  constructor (private DogStoreService: DogStoreService, private router: Router) { }
-  userLogged: any
-  ourDogs$: Observable<Dog[]>
+  constructor (
+    private DogStoreService: DogStoreService,
+    private router: Router
+  ) {}
 
-  ngOnInit (): void {
-    this.DogStoreService.userLogged$.subscribe((user) => {
-      this.userLogged = user
-    })
-    this.ourDogs$ = this.DogStoreService.apiDogsUser(this.userLogged?._id)
+  ourDogs$ = new Observable();
+  isLogged$ = new BehaviorSubject(null);
 
-    if (!this.userLogged) {
-      this.router.navigate(['/'])
-    }
+  userLogged$ = this.DogStoreService.userLogged$
+    .pipe(
+      tap(isLogged => !isLogged && this.router.navigate(['/'])),
+      tap(user => {
+        if (user) this.isLogged$.next(user._id)
+      })
+    )
+
+  ngOnInit () {
+    this.ourDogs$ = this.isLogged$
+      .pipe(
+        filter(event => !!event),
+        switchMap((id: string) => this.DogStoreService.apiDogsUser(id))
+      )
   }
 }

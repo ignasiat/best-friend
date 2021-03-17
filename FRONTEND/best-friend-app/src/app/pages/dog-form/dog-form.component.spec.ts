@@ -5,8 +5,6 @@ import { FormBuilder } from '@angular/forms'
 
 import { DogFormComponent } from './dog-form.component'
 
-import { userMock } from '../../constants/user-mock'
-
 import { DebugElement } from '@angular/core'
 
 describe('DogFormComponent', () => {
@@ -49,35 +47,6 @@ describe('DogFormComponent', () => {
     expect(patchValueSpy).toHaveBeenCalled()
   })
 
-  it('Should not called apiBreed onInit if breeds$ have values', () => {
-    component.breeds$.next([{ _id: '1', name: 'fake breed' }])
-
-    const apiBreedsSpy = spyOn(component.DogStoreService, 'apiBreeds')
-
-    component.ngOnInit()
-
-    expect(apiBreedsSpy).not.toHaveBeenCalled()
-  })
-
-  it('Should not called apiColor onInit if colors$ have values', () => {
-    component.colors$.next([{ _id: '1', name: 'fake color' }])
-
-    const apiColorsSpy = spyOn(component.DogStoreService, 'apiColors')
-
-    component.ngOnInit()
-
-    expect(apiColorsSpy).not.toHaveBeenCalled()
-  })
-
-  it('Should not called apiShelter onInit if shelters$ have values', () => {
-    component.shelters$.next([userMock])
-
-    const apiShelterSpy = spyOn(component.DogStoreService, 'apiShelter')
-
-    component.ngOnInit()
-
-    expect(apiShelterSpy).not.toHaveBeenCalled()
-  })
   it('Should render a button with value "Upload Dog"', () => {
     const bannerDe: DebugElement = fixture.debugElement
     const bannerEl: HTMLElement = bannerDe.nativeElement

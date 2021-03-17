@@ -13,7 +13,10 @@ export class HeaderComponent implements OnInit {
     this.DogStoreService.userLogged$.subscribe((user) => { this.userLogged = user })
   }
 
-  constructor (private DogStoreService: DogStoreService, private router: Router) {}
+  constructor (
+    private DogStoreService: DogStoreService,
+    private router: Router
+  ) {}
 
   userLogged: User;
 
