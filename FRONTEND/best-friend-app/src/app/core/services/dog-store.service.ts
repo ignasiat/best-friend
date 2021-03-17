@@ -18,13 +18,16 @@ export class DogStoreService {
   selectedDog$ = new BehaviorSubject<Dog>(null)
   userLogged$ = new BehaviorSubject<User>(null)
 
-  apiDogsAdoption (): void {
-    this.DogService.fetchDogs().pipe(
-      map(dogs =>
-        dogs.filter(dog => dog.adoption === true))).subscribe((answer) => {
-      this.dogsAdoption$.next(answer)
-      this.dogsAdoptionCopy$.next(answer)
-    })
+  apiDogsAdoption (): Observable<Dog[]> {
+    return this.DogService.fetchDogs()
+      .pipe(
+        map(dogs =>
+          dogs.filter(dog => dog.adoption === true)),
+        tap((answer) => {
+          this.dogsAdoption$.next(answer)
+          this.dogsAdoptionCopy$.next(answer)
+        })
+      )
   }
 
   apiDogsUser (userId: String): Observable<Dog[]> {
