@@ -76,10 +76,15 @@
       <input type="checkbox" formControlName="adoption" checked/>For adoption
     </div>
     <div>
-      <label>
+      <label class="file__custom">
         Pictures
         <input type="file" multiple="multiple" required (change)="fileChange($event)">
       </label>
+      <ul *ngIf="this.filesArray.length > 0">
+        <li *ngFor="let file of this.filesArray">
+          {{file}}
+        </li>
+      </ul>
     </div>
   </div>
   <div class="upload">
