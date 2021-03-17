@@ -1,5 +1,5 @@
 <main>
-  <section *ngIf="userLogged">
+  <section *ngIf="userLogged$ | async as userLogged">
     <app-user-card [user]="userLogged"></app-user-card>
   </section>
   <section>
