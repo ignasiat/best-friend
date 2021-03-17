@@ -1,5 +1,5 @@
 <main>
-  <div *ngIf="selectedshelter">
+  <div *ngIf="selectedshelter$ | async">
     <app-user-card [user]="selectedshelter"></app-user-card>
   </div>
   <section>
