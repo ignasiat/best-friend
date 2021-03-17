@@ -19,12 +19,4 @@ export class UserComponent {
     )
 
   ourDogs$ = this.DogStoreService.apiDogsUser(this.id)
-
-  // selectedshelter: any
-  // ourDogs$: Observable<Dog[]>
-
-  // ngOnInit (): void {
-  //   this.DogStoreService.apiShelter().subscribe((shelters) => { this.selectedshelter = shelters.find((shelter) => shelter._id === this.id) })
-  //   this.ourDogs$ = this.DogStoreService.apiDogsUser(this.id)
-  // }
 }
