@@ -1,3 +1,5 @@
+@import '../../../styles/colors';
+
 .nav--mobile {
 
   mat-toolbar {
@@ -23,7 +25,7 @@
 
 a:link, a:visited, a:hover, a:active {
   text-decoration: none;
-  color: #000;
+  color: $color-primary;
 }
 
 @media only screen and (min-width: 600px) {
@@ -32,26 +34,30 @@ a:link, a:visited, a:hover, a:active {
   }  
 
   .nav--desktop {
+    margin: 10px 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-  
-    .nav__logo {
-      width: 120px;
-      filter: invert(36%) sepia(85%) saturate(337%) hue-rotate(122deg) brightness(98%) contrast(94%);
-    }
-    ul {
+    div {
       display: flex;
-      list-style: none;
-      li {
-        padding: 10px;
+      .nav__logo {
+        width: 120px;
+        filter: invert(36%) sepia(85%) saturate(337%) hue-rotate(122deg) brightness(98%) contrast(94%);
+      }
+      ul {
+        margin: 0px 0px 0px 40px;
+        font-family: Montserrat;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        list-style: none;
+        li {
+          color: $color-primary;
+          padding: 10px;
+          margin: 0px 5px;
+        }
       }
     }
-    .nav__spacer {
-      width: 10%;
-    }
-    mat-form-field {
-      width: 150px;
-    }
+
   }
 }
