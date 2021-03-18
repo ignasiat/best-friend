@@ -8,12 +8,12 @@ import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
 import { map, tap } from 'rxjs/operators'
-import { dogMock } from 'src/app/constants/dog-mock'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogStoreService {
+  dogs$ = new BehaviorSubject<Dog[]>([])
   dogsAdoption$ = new BehaviorSubject<Dog[]>([])
   dogsAdoptionCopy$ = new BehaviorSubject<Dog[]>([])
   selectedDog$ = new BehaviorSubject<Dog>(null)
@@ -22,6 +22,7 @@ export class DogStoreService {
   apiDogsAdoption (): Observable<Dog[]> {
     return this.DogService.fetchDogs()
       .pipe(
+        tap((dogs) => { this.dogs$.next(dogs) }),
         map(dogs =>
           dogs.filter(dog => dog.adoption === true)),
         tap((answer) => {
@@ -76,7 +77,7 @@ export class DogStoreService {
   }
 
   getSelectedDog (dogId): void {
-    this.selectedDog$.next(this.dogsAdoption$.getValue().find((element) => element._id === dogId))
+    this.selectedDog$.next(this.dogs$.getValue().find((element) => element._id === dogId))
   }
 
   apiSignIn (signData: SignIn) {
@@ -88,5 +89,7 @@ export class DogStoreService {
     this.DogService.signOut().subscribe(() => this.userLogged$.next(null))
   }
 
-  constructor (public DogService: DogService) { }
+  constructor (
+    public DogService: DogService
+  ) {}
 }
