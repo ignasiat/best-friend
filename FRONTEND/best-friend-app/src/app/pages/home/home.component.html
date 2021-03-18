@@ -9,7 +9,7 @@
 
   <section>
     <mat-card *ngFor="let dog of dogs$ | async" class="example-card">    
-    <app-dog-card [dog]="dog"></app-dog-card>
+    <app-dog-card [dog]="dog" [actions]="'normal'"></app-dog-card>
     </mat-card>
   </section>
 

@@ -4,7 +4,7 @@
   </section>
   <section>
     <mat-card *ngFor="let dog of ourDogs$ | async" class="example-card">
-      <app-dog-card [dog]="dog"></app-dog-card>
+      <app-dog-card [dog]="dog" [actions]="'profile'"></app-dog-card>
     </mat-card>
   </section>
 </main>

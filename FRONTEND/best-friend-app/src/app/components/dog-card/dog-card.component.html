@@ -9,7 +9,13 @@
     {{dog.description}}
   </p>
 </mat-card-content>
-<mat-card-actions>
+<mat-card-actions *ngIf="actions === 'normal'">
   <a [routerLink]="['/dog', dog._id]" mat-button>ADOPT</a>
   <a [routerLink]="['/user', dog.shelter._id]" mat-button>SPONSOR</a>
+</mat-card-actions>
+<mat-card-actions *ngIf="actions === 'profile'">
+  <a [routerLink]="['/dog', dog._id]" mat-button>EDIT</a>
+  <a *ngIf="dog.adoption" [routerLink]="['/dog', dog._id]" mat-button>ADOPTED</a>
+  <a *ngIf="!dog.adoption" [routerLink]="['/dog', dog._id]" mat-button>FOR ADOPTION</a>
+  <a (click) mat-button>DELETE</a>
 </mat-card-actions>
