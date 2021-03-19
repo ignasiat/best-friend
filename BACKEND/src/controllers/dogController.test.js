@@ -24,16 +24,7 @@ describe('Given a getDogById function', () => {
       Dog.findById
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await getDogById(req, res);
@@ -69,16 +60,7 @@ describe('Given a getAllDogs function', () => {
       Dog.find
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await getAllDogs(req, res);
@@ -97,16 +79,7 @@ describe('Given a getDogsByShelter function', () => {
       Dog.find
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await getDogsByShelter(req, res);
@@ -125,16 +98,7 @@ describe('Given a updateDogById function', () => {
       Dog.findByIdAndUpdate
         .mockImplementationOnce(() => ({
           populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
+            .mockImplementationOnce(() => ({ exec: jest.fn() }))
         }));
 
       await updateDogById(req, res);
@@ -151,19 +115,7 @@ describe('Given a deleteDogById function', () => {
       const res = { json: jest.fn() };
 
       Dog.findByIdAndRemove
-        .mockImplementationOnce(() => ({
-          populate: jest.fn()
-            .mockImplementationOnce(() => ({
-              populate: jest.fn()
-                .mockImplementationOnce(() => ({
-                  populate: jest.fn()
-                    .mockImplementationOnce(() => ({
-                      populate: jest.fn()
-                        .mockImplementationOnce(() => ({ exec: jest.fn() }))
-                    }))
-                }))
-            }))
-        }));
+        .mockImplementationOnce(() => ({ exec: jest.fn() }));
 
       await deleteDogById(req, res);
 
