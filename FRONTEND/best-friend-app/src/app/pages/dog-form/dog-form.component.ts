@@ -1,8 +1,9 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { ages } from 'src/app/constants/ages'
 import { sizes } from 'src/app/constants/sizes'
+import { Dog } from 'src/app/core/models/Dog'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
 import { sexs } from '../../constants/sexs'
 
@@ -11,12 +12,16 @@ import { sexs } from '../../constants/sexs'
   templateUrl: './dog-form.component.html',
   styleUrls: ['./dog-form.component.scss']
 })
-export class DogFormComponent {
+
+export class DogFormComponent implements OnInit {
   constructor (
     private fb: FormBuilder,
     public DogStoreService: DogStoreService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
+
+  id = this.activatedRoute.snapshot.params.dogId
 
   sexArray = sexs
   ageArray = ages
@@ -26,7 +31,10 @@ export class DogFormComponent {
   shelters$ = this.DogStoreService.apiShelter()
   filesArray: string[] = []
 
+  selectedDog: Dog
+
   dogForm = this.fb.group({
+    _id: [''],
     name: ['', [Validators.required]],
     shelter: ['', [Validators.required]],
     description: ['', [Validators.required]],
@@ -40,7 +48,15 @@ export class DogFormComponent {
   })
 
   dogSubmit () {
-    this.DogStoreService.addApiDogs(this.dogForm.value).subscribe((newDog) => this.router.navigate(['/dog', newDog._id]))
+    const dogId = this.dogForm.value._id
+    const dataSend = this.dogForm.value
+    delete dataSend._id
+    dataSend.owner = null
+    if (dogId === '') {
+      this.DogStoreService.addApiDogs(dataSend).subscribe((newDog) => this.router.navigate(['/dog', newDog._id]))
+    } else {
+      this.DogStoreService.updateDogApi(dogId, dataSend).subscribe((updatedDog) => { this.DogStoreService.filterAdoptionDogs(); this.router.navigate(['/dog', updatedDog._id]) })
+    }
   }
 
   fileChange (event) {
@@ -50,5 +66,24 @@ export class DogFormComponent {
     })
     this.dogForm.patchValue({ imagesURL: newArray })
     this.filesArray = newArray
+  }
+
+  ngOnInit (): void {
+    if (this.id !== 1) {
+      this.DogStoreService.getSelectedDog(this.id)
+      this.DogStoreService.selectedDog$.subscribe((dog) => {
+        this.selectedDog = dog
+        if (dog) {
+          this.dogForm.patchValue(dog)
+          this.dogForm.patchValue({
+            shelter: dog.shelter._id,
+            color: dog.color._id,
+            breed: dog.breed._id,
+            imagesURL: dog.photosURL
+          })
+          this.filesArray = dog.photosURL
+        }
+      })
+    }
   }
 }
