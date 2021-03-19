@@ -46,4 +46,12 @@ export class DogService {
   signOut (): Observable<Dog[]> {
     return this.httpClient.get<Dog[]>(`${this.dogsApi}/auth/logout`)
   }
+
+  updateApiDog (dogId: string, newData: Dog): Observable<Dog> {
+    return this.httpClient.put<Dog>(`${this.dogsApi}/dog/${dogId}`, newData)
+  }
+
+  deleteApiDog (dogId: string): Observable<Dog> {
+    return this.httpClient.delete<Dog>(`${this.dogsApi}/dog/${dogId}`)
+  }
 }
