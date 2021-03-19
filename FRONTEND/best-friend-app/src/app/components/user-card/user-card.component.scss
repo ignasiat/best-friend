@@ -27,7 +27,7 @@ section {
           max-width: 300px;
           border: 3px solid #2FB1A0;
           position: absolute;
-          top: 50px;
+          top: 65px;
           box-shadow: 0px 2px 13px 5px rgba(47,177,160,0.75);
           -webkit-box-shadow: 0px 2px 13px 5px rgba(47,177,160,0.75);
           -moz-box-shadow: 0px 2px 13px 5px rgba(47,177,160,0.75);
@@ -45,7 +45,10 @@ section {
 }
 @media only screen and (min-width: 988px) { 
   section {
-    width: 60%;
+    width: 70%;
+    h1 {
+      margin-top: 25px;
+    }
     .data {
       .photo__item {
         img {
