@@ -8,5 +8,4 @@ import { Dog } from 'src/app/core/models/Dog'
 })
 export class DogCardComponent {
   @Input() dog: Dog
-  @Input() actions: string
 }
