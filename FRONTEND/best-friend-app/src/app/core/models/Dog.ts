@@ -1,25 +1,9 @@
+import { User } from './User'
+
 export interface Dog {
   _id: string,
   name: string,
-  shelter: {
-    _id: string,
-    name: string,
-    address: {
-      _id: string,
-      street: string,
-      number: string,
-      city: string,
-      zipCode: string,
-      region: string
-    }
-    phone: string,
-    email: string,
-    password: string,
-    website: string,
-    information: string,
-    photoURL: string,
-    userType: string
-  },
+  shelter: User,
   breed: {
     _id: string,
     name: string
@@ -33,5 +17,6 @@ export interface Dog {
   },
   description: string,
   photosURL: string[],
-  adoption: boolean
+  adoption: boolean,
+  owner: User | null | {_id: string},
 }
