@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { map } from 'rxjs/operators'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
@@ -8,7 +8,7 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   id = this.activatedRoute.snapshot.params.userId
 
   constructor (
@@ -21,5 +21,13 @@ export class UserComponent {
       map((shelters) => shelters.find((shelter) => shelter._id === this.id))
     )
 
-  ourDogs$ = this.DogStoreService.apiDogsUser(this.id)
+  dogsUser$ = this.DogStoreService.dogsUser$
+    .pipe(
+      map(dogs => dogs.filter(dog => dog.adoption)
+      )
+    )
+
+  ngOnInit () {
+    this.DogStoreService.filterUserDogs(this.id)
+  }
 }

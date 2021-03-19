@@ -8,20 +8,22 @@ import { Breed } from '../models/Breed'
 import { User } from '../models/User'
 import { SignIn } from '../models/SignIn'
 import { map, tap } from 'rxjs/operators'
-import { dogMock } from 'src/app/constants/dog-mock'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogStoreService {
+  dogs$ = new BehaviorSubject<Dog[]>([])
   dogsAdoption$ = new BehaviorSubject<Dog[]>([])
   dogsAdoptionCopy$ = new BehaviorSubject<Dog[]>([])
+  dogsUser$ = new BehaviorSubject<Dog[]>([])
   selectedDog$ = new BehaviorSubject<Dog>(null)
   userLogged$ = new BehaviorSubject<User>(null)
 
   apiDogsAdoption (): Observable<Dog[]> {
     return this.DogService.fetchDogs()
       .pipe(
+        tap((dogs) => { this.dogs$.next(dogs) }),
         map(dogs =>
           dogs.filter(dog => dog.adoption === true)),
         tap((answer) => {
@@ -31,10 +33,14 @@ export class DogStoreService {
       )
   }
 
-  apiDogsUser (userId: String): Observable<Dog[]> {
-    return this.DogService.fetchDogs().pipe(
-      map(dogs =>
-        dogs.filter(dog => dog.shelter._id === userId)))
+  filterUserDogs (userId: string) : void {
+    this.dogsUser$.next(this.dogs$.getValue().filter((dog) => dog.shelter._id === userId))
+  }
+
+  filterAdoptionDogs (): void {
+    const adoptionDogs = this.dogs$.getValue().filter((dog) => dog.adoption)
+    this.dogsAdoption$.next(adoptionDogs)
+    this.dogsAdoptionCopy$.next(adoptionDogs)
   }
 
   apiBreeds (): Observable<Breed[]> {
@@ -53,6 +59,7 @@ export class DogStoreService {
     return this.DogService.addDog(newDog)
       .pipe(
         tap(dog => {
+          this.dogs$.next([...this.dogs$.getValue(), dog])
           if (dog.adoption) {
             const newDogs: Dog[] = [...this.dogsAdoption$.getValue(), dog]
             this.dogsAdoption$.next(newDogs)
@@ -76,7 +83,7 @@ export class DogStoreService {
   }
 
   getSelectedDog (dogId): void {
-    this.selectedDog$.next(this.dogsAdoption$.getValue().find((element) => element._id === dogId))
+    this.selectedDog$.next(this.dogs$.getValue().find((element) => element._id === dogId))
   }
 
   apiSignIn (signData: SignIn) {
@@ -88,5 +95,28 @@ export class DogStoreService {
     this.DogService.signOut().subscribe(() => this.userLogged$.next(null))
   }
 
-  constructor (public DogService: DogService) { }
+  updateDogApi (dogId: string, newData: Dog): Observable<Dog> {
+    return this.DogService.updateApiDog(dogId, newData)
+      .pipe(
+        tap(dog => this.dogs$.next(this.dogs$.getValue().map((itemDog) => {
+          if (itemDog._id === dogId) {
+            return dog
+          } else {
+            return itemDog
+          }
+        }))),
+        tap(dog => this.selectedDog$.next(dog))
+      )
+  }
+
+  eraseDogApi (dogId: string): Observable<Dog> {
+    return this.DogService.deleteApiDog(dogId)
+      .pipe(
+        tap(dog => this.dogs$.next(this.dogs$.getValue().filter(dogItem => dogItem._id !== dogId)))
+      )
+  }
+
+  constructor (
+    public DogService: DogService
+  ) {}
 }

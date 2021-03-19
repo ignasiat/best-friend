@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'dogs', component: DogsComponent },
   { path: 'dog/:dogId', component: DogComponent },
   { path: 'user/:userId', component: UserComponent },
-  { path: 'form', component: DogFormComponent },
+  { path: 'form/:dogId', component: DogFormComponent },
   { path: 'signin', component: SignInComponent },
   { path: 'profile', component: ProfileComponent }
 ]

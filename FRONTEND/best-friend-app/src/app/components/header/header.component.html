@@ -41,12 +41,6 @@
         <span>Sign Out</span>
       </button>
     </mat-menu>
-    <form class="example-form">
-      <mat-form-field>
-        <input type="text" matInput placeholder="Search">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </form>
     <div *ngIf="!this.userLogged">
       <a routerLink="/signin">
         <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
@@ -61,21 +55,18 @@
 </nav>
 
 <nav class="nav--desktop" aria-label="Menu Site">
+  <div>
   <img src="../../../assets/bestfriend-menu.svg" alt="logo" class="nav__logo">
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/dogs">Dogs</a></li>
-    <li>Members</li>
-    <li><a routerLink="/form">About Us</a></li>
-  </ul>
-  <div class="nav__spacer"></div>
-  <form class="example-form">
-    <mat-form-field>
-      <input type="text" matInput placeholder="Search">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </form>
-  <div class="nav__spacer"></div>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/dogs">Dogs</a></li>
+      <li>Members</li>
+      <li><a routerLink="/form">About Us</a></li>
+      <li *ngIf="!this.userLogged"><a routerLink="/signin">Sign In</a></li>
+      <li *ngIf="this.userLogged"><a (click)="logout()">Sign Out</a></li>
+    </ul>
+  </div>  
+  
   <div *ngIf="!this.userLogged">
     <a routerLink="/signin">
       <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />

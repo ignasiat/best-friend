@@ -1,6 +1,8 @@
 <main>
-<h1>New dog</h1>
+<h1 *ngIf="id === '1'">New dog</h1>
+<h1 *ngIf="id !== '1'">Update dog</h1>
 <form [formGroup]="dogForm">
+  <input type="hidden" formControlName="_id">
   <div class="mat-form-cont">
     <mat-form-field appearance="outline">
       <mat-label>Name*</mat-label>

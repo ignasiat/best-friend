@@ -1,10 +1,51 @@
 <main>
-  <section *ngIf="userLogged$ | async as userLogged">
-    <app-user-card [user]="userLogged"></app-user-card>
-  </section>
-  <section>
-    <mat-card *ngFor="let dog of ourDogs$ | async" class="example-card">
-      <app-dog-card [dog]="dog"></app-dog-card>
-    </mat-card>
-  </section>
+  <div *ngIf="userLogged$ | async as userLogged">
+    <section >
+      <app-user-card [user]="userLogged"></app-user-card>
+    </section>
+    <div *ngIf="userLogged.userType === 'SHELTER'">
+      <section>
+        <a [routerLink]="['/form/1']" mat-button>
+          <h2>
+            <mat-icon>add</mat-icon> 
+            Add a dog
+          </h2>
+        </a>
+      </section>
+      <div *ngIf="dogsUserForAdoption.length > 0">
+        <h2>Dogs for adoption</h2>
+        <section >
+          <mat-card *ngFor="let dog of dogsUserForAdoption" class="example-card"> 
+            <app-dog-card-content [dog]="dog"></app-dog-card-content>
+            <mat-card-actions>
+              <a [routerLink]="['/form', dog._id]" mat-button>EDIT</a>
+              <a (click)="adoption(dog, false)" mat-button>ADOPTED</a>
+              <a (click)="delete(dog._id)" mat-button>DELETE</a>
+            </mat-card-actions>
+          </mat-card>
+        </section>
+        <div *ngIf="dogsUserAdopted.length > 0">
+          <h2>Dogs Adopted</h2>
+          <section>
+            <mat-card *ngFor="let dog of dogsUserAdopted" class="example-card"> 
+              <app-dog-card-content [dog]="dog"></app-dog-card-content>
+              <mat-card-actions>
+                <a [routerLink]="['/form', dog._id]" mat-button>EDIT</a>
+                <a (click)="adoption(dog, true)" mat-button>FOR ADOPTION</a>
+                <a (click)="delete(dog._id)" mat-button>DELETE</a>
+              </mat-card-actions>
+            </mat-card>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="userLogged.userType === 'USER' && dogsOwner.length > 0">
+      <h2>Dogs adopted</h2>
+      <section>
+        <mat-card *ngFor="let dog of dogsOwner" class="example-card">
+          <app-dog-card-content [dog]="dog"></app-dog-card-content>
+        </mat-card>
+      </section>
+    </div>
+  </div>
 </main>
