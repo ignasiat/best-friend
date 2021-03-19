@@ -37,8 +37,10 @@
 
   <section>
     <mat-card *ngFor="let dog of dogsCopy$ | async" class="example-card">
-     <app-dog-card [dog]="dog" [actions]="'normal'"></app-dog-card>
+     <app-dog-card [dog]="dog"></app-dog-card>
     </mat-card>
   </section>
-
+  <div *ngIf="dogsCopy$ | async as dogsCopy">
+    <h2 *ngIf="dogsCopy.length === 0">No dogs matching your criteria</h2>
+  </div>
 </main>
