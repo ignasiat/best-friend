@@ -18,10 +18,6 @@ function AuthRouter() {
     .route('/logout')
     .get(controller.logout);
 
-  router
-    .route('/test')
-    .get(controller.test);
-
   return router;
 }
 
