@@ -8,24 +8,29 @@ require('../models/colorModel');
 
 async function getDogById(req, res) {
   const { dogId } = req.params;
-  const findDog = await Dog
-    .findById(dogId)
-    .populate([
-      'shelter',
-      {
-        path: 'shelter',
-        populate: { path: 'address' }
-      },
-      'breed',
-      'color',
-      'owner',
-      {
-        path: 'owner',
-        populate: { path: 'address' }
-      }])
-    .exec();
-
-  res.json(findDog);
+  try {
+    const findDog = await Dog
+      .findById(dogId)
+      .populate([
+        'shelter',
+        {
+          path: 'shelter',
+          populate: { path: 'address' }
+        },
+        'breed',
+        'color',
+        'owner',
+        {
+          path: 'owner',
+          populate: { path: 'address' }
+        }])
+      .exec();
+    res.status(200);
+    res.json(findDog);
+  } catch (error) {
+    res.status(500);
+    res.json(error);
+  }
 }
 
 function uploadCloudinary(newDog, imagesURL) {
@@ -47,7 +52,7 @@ function uploadCloudinary(newDog, imagesURL) {
 }
 
 async function createDog(req, res) {
-  const newDog = new Dog(req.body);
+  let newDog = new Dog(req.body);
 
   newDog.photosURL = [];
   // dog_promises will be an array of promises
@@ -55,14 +60,9 @@ async function createDog(req, res) {
   // Promise.all will fire when all promises are resolved
   try {
     await Promise.all(dogPromises);
-    newDog.save((err) => {
-      if (err) {
-        res.status(500);
-        res.json(err);
-      }
-      req.params.dogId = newDog._id;
-      getDogById(req, res);
-    });
+    newDog = await newDog.save();
+    req.params.dogId = newDog._id;
+    getDogById(req, res);
   } catch (error) {
     res.status(500);
     res.json(error);
@@ -70,45 +70,56 @@ async function createDog(req, res) {
 }
 
 async function getAllDogs(req, res) {
-  const allDogs = await Dog
-    .find({})
-    .populate([
-      'shelter',
-      {
-        path: 'shelter',
-        populate: { path: 'address' }
-      },
-      'breed',
-      'color',
-      'owner',
-      {
-        path: 'owner',
-        populate: { path: 'address' }
-      }])
-    .exec();
-  res.json(allDogs);
+  try {
+    const allDogs = await Dog
+      .find({})
+      .populate([
+        'shelter',
+        {
+          path: 'shelter',
+          populate: { path: 'address' }
+        },
+        'breed',
+        'color',
+        'owner',
+        {
+          path: 'owner',
+          populate: { path: 'address' }
+        }])
+      .exec();
+    res.status(200);
+    res.json(allDogs);
+  } catch (error) {
+    res.status(500);
+    res.json(error);
+  }
 }
 
 async function getDogsByShelter(req, res) {
   const { userId } = req.params;
-  const findDogs = await Dog
-    .find({ shelter: userId })
-    .populate([
-      'shelter',
-      {
-        path: 'shelter',
-        populate: { path: 'address' }
-      },
-      'breed',
-      'color',
-      'owner',
-      {
-        path: 'owner',
-        populate: { path: 'address' }
-      }])
-    .exec();
-
-  res.json(findDogs);
+  try {
+    const findDogs = await Dog
+      .find({ shelter: userId })
+      .populate([
+        'shelter',
+        {
+          path: 'shelter',
+          populate: { path: 'address' }
+        },
+        'breed',
+        'color',
+        'owner',
+        {
+          path: 'owner',
+          populate: { path: 'address' }
+        }])
+      .exec();
+    res.status(200);
+    res.json(findDogs);
+  } catch (error) {
+    res.status(500);
+    res.json(error);
+  }
 }
 
 async function updateDogById(req, res) {
@@ -121,14 +132,29 @@ async function updateDogById(req, res) {
       dataDog.photosURL = req.body.imagesURL;
       delete dataDog.imagesURL;
     }
-
-    updatedDog = await Dog
-      .findByIdAndUpdate(dogId, dataDog, { new: true })
-      .populate(['shelter', {
-        path: 'shelter',
-        populate: { path: 'address' }
-      }, 'breed', 'color'])
-      .exec();
+    try {
+      updatedDog = await Dog
+        .findByIdAndUpdate(dogId, dataDog, { new: true })
+        .populate([
+          'shelter',
+          {
+            path: 'shelter',
+            populate: { path: 'address' }
+          },
+          'breed',
+          'color',
+          'owner',
+          {
+            path: 'owner',
+            populate: { path: 'address' }
+          }])
+        .exec();
+      res.status(200);
+      res.json(updatedDog);
+    } catch (error) {
+      res.status(500);
+      res.json(error);
+    }
   } else {
     dataDog.photosURL = [];
     // dog_promises will be an array of promises
@@ -137,29 +163,49 @@ async function updateDogById(req, res) {
       await Promise.all(dogPromises);
       updatedDog = await Dog
         .findByIdAndUpdate(dogId, dataDog, { new: true })
-        .populate(['shelter', {
-          path: 'shelter',
-          populate: { path: 'address' }
-        }, 'breed', 'color'])
+        .populate([
+          'shelter',
+          {
+            path: 'shelter',
+            populate: { path: 'address' }
+          },
+          'breed',
+          'color',
+          'owner',
+          {
+            path: 'owner',
+            populate: { path: 'address' }
+          }])
         .exec();
+      res.status(200);
+      res.json(updatedDog);
     } catch (error) {
       res.status(500);
       res.json(error);
     }
   }
-
-  res.json(updatedDog);
 }
 
 async function deleteDogById(req, res) {
   const { dogId } = req.params;
-  const deletedDog = await Dog
-    .findByIdAndRemove(dogId)
-    .exec();
-
-  res.json(deletedDog);
+  try {
+    const deletedDog = await Dog
+      .findByIdAndRemove(dogId)
+      .exec();
+    res.status(200);
+    res.json(deletedDog);
+  } catch (error) {
+    res.status(500);
+    res.json(error);
+  }
 }
 
 module.exports = {
-  createDog, getAllDogs, getDogById, getDogsByShelter, updateDogById, deleteDogById
+  createDog,
+  getAllDogs,
+  getDogById,
+  getDogsByShelter,
+  updateDogById,
+  deleteDogById,
+  uploadCloudinary
 };
