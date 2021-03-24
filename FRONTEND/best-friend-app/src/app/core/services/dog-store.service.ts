@@ -6,7 +6,7 @@ import { constants } from '../../constants/index'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
-import { SignIn } from '../models/SignIn'
+import { SignIn } from '../models/Sign-In'
 import { map, tap } from 'rxjs/operators'
 
 @Injectable({
@@ -21,7 +21,7 @@ export class DogStoreService {
   userLogged$ = new BehaviorSubject<User>(null)
 
   apiDogsAdoption (): Observable<Dog[]> {
-    return this.DogService.fetchDogs()
+    return this.DogServ.fetchDogs()
       .pipe(
         tap((dogs) => { this.dogs$.next(dogs) }),
         map(dogs =>
@@ -44,19 +44,19 @@ export class DogStoreService {
   }
 
   apiBreeds (): Observable<Breed[]> {
-    return this.DogService.fetchBreeds()
+    return this.DogServ.fetchBreeds()
   }
 
   apiColors (): Observable<Color[]> {
-    return this.DogService.fetchColors()
+    return this.DogServ.fetchColors()
   }
 
-  apiShelter (): Observable<any> {
-    return this.DogService.fetchShelters()
+  apiShelter (): Observable<User[]> {
+    return this.DogServ.fetchShelters()
   }
 
   addApiDogs (newDog: Dog): Observable<Dog> {
-    return this.DogService.addDog(newDog)
+    return this.DogServ.addDog(newDog)
       .pipe(
         tap(dog => {
           this.dogs$.next([...this.dogs$.getValue(), dog])
@@ -68,7 +68,7 @@ export class DogStoreService {
         }))
   }
 
-  filteredDogs (sexValue: String, ageValue: String, sizeValue:String) {
+  filteredDogs (sexValue: string, ageValue: string, sizeValue:string) {
     let filtered: Dog[] = this.dogsAdoption$.getValue()
     if (sexValue && sexValue !== constants.ANY) {
       filtered = filtered.filter((element) => element.sex === sexValue)
@@ -87,16 +87,16 @@ export class DogStoreService {
   }
 
   apiSignIn (signData: SignIn) {
-    return this.DogService.signIn(signData)
+    return this.DogServ.signIn(signData)
       .pipe(tap((answer) => { this.userLogged$.next(answer) }))
   }
 
   apiSignOut () : void {
-    this.DogService.signOut().subscribe(() => this.userLogged$.next(null))
+    this.DogServ.signOut().subscribe(() => this.userLogged$.next(null))
   }
 
   updateDogApi (dogId: string, newData: Dog): Observable<Dog> {
-    return this.DogService.updateApiDog(dogId, newData)
+    return this.DogServ.updateApiDog(dogId, newData)
       .pipe(
         tap(dog => this.dogs$.next(this.dogs$.getValue().map((itemDog) => {
           if (itemDog._id === dogId) {
@@ -105,18 +105,21 @@ export class DogStoreService {
             return itemDog
           }
         }))),
-        tap(dog => this.selectedDog$.next(dog))
+        tap(dog => {
+          this.selectedDog$.next(dog)
+          this.filterAdoptionDogs()
+        })
       )
   }
 
   eraseDogApi (dogId: string): Observable<Dog> {
-    return this.DogService.deleteApiDog(dogId)
+    return this.DogServ.deleteApiDog(dogId)
       .pipe(
         tap(dog => this.dogs$.next(this.dogs$.getValue().filter(dogItem => dogItem._id !== dogId)))
       )
   }
 
   constructor (
-    public DogService: DogService
+    private DogServ: DogService
   ) {}
 }

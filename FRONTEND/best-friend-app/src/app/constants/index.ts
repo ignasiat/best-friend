@@ -1,17 +1,17 @@
 interface constantsInterface {
-  FEMALE: String,
-  MALE: String,
-  SMALL: String,
-  MEDIUM: String,
-  LARGE: String,
-  XLARGE: String,
-  USER: String,
-  SHELTER: String,
-  PUPPY: String,
-  YOUNG: String,
-  ADULT: String,
-  SENIOR: String,
-  ANY: String
+  FEMALE: string,
+  MALE: string,
+  SMALL: string,
+  MEDIUM: string,
+  LARGE: string,
+  XLARGE: string,
+  USER: string,
+  SHELTER: string,
+  PUPPY: string,
+  YOUNG: string,
+  ADULT: string,
+  SENIOR: string,
+  ANY: string
 }
 
 export const constants: constantsInterface = {

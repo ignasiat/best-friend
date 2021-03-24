@@ -1,5 +1,5 @@
-@import '../../../styles/colors';
-@import '../../../styles/title';
+@import "../../../styles/colors";
+@import "../../../styles/title";
 
 main {
   display: flex;
@@ -17,11 +17,11 @@ main {
   }
   .file__custom {
     width: 200px;
-    input[type=file] {
+    input[type="file"] {
       display: none;
     }
   }
-  input[type=checkbox] {
+  input[type="checkbox"] {
     margin: 0px 10px 0px 20px;
   }
   .last-input {
@@ -31,44 +31,53 @@ main {
     div {
       width: 270px;
     }
+    .file__custom {
+      background-color: $color-primary;
+      color: #fff;
+      padding: 7px;
+      border-radius: 15px;
+    }
+    input[type="file"] {
+      display: none;
+    }
   }
   .upload {
     display: flex;
     justify-content: center;
 
     .upload-item:disabled {
-      opacity: .4;
+      opacity: 0.4;
     }
     .upload-item {
       box-shadow: 0px 10px 14px -7px #276873;
-      background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-      background-color:#599bb3;
-      border-radius:8px;
-      display:inline-block;
-      cursor:pointer;
-      color:#ffffff;
-      font-family:Arial;
-      font-size:20px;
-      font-weight:bold;
-      padding:13px 32px;
-      text-decoration:none;
-      text-shadow:0px 1px 0px #3d768a;
+      background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+      background-color: #599bb3;
+      border-radius: 8px;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 13px 32px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #3d768a;
     }
     .upload-item:hover {
-      background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-      background-color:#408c99;
+      background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+      background-color: #408c99;
     }
     .upload-item:active {
-      position:relative;
-      top:1px;
+      position: relative;
+      top: 1px;
     }
   }
 }
-@media only screen and (min-width: 988px) { 
+@media only screen and (min-width: 988px) {
   mat-form-field {
     width: 400px;
     font-size: 16px;
-  } 
+  }
   .last-input {
     font-size: 16px;
     div:first-of-type {

@@ -24,7 +24,6 @@ section {
         height: 140px;
         img {
           border-radius: 10px;
-          max-width: 300px;
           border: 3px solid #2FB1A0;
           position: absolute;
           top: 65px;
@@ -48,13 +47,6 @@ section {
     width: 70%;
     h1 {
       margin-top: 25px;
-    }
-    .data {
-      .photo__item {
-        img {
-          max-width: 340px;
-        }
-      }
     }
   }
 }

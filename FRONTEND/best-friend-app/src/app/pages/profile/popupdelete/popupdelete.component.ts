@@ -10,23 +10,27 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
 })
 export class PopupdeleteComponent implements OnInit {
   constructor (
-    public modalService: NgbModal,
-    private DogStoreService: DogStoreService,
+    private modalService: NgbModal,
+    private DogStore: DogStoreService,
     private router: Router
   ) { }
 
   @Input() dogId: string
-  userLogged$ = this.DogStoreService.userLogged$
+  userLogged$ = this.DogStore.userLogged$
 
   selectedDog: Dog
   ngOnInit (): void {
-    this.selectedDog = this.DogStoreService.selectedDog$.getValue()
+    this.selectedDog = this.DogStore.selectedDog$.getValue()
   }
 
   delete (): void {
-    this.DogStoreService.eraseDogApi(this.dogId).subscribe((dog) => {
-      this.DogStoreService.filterUserDogs(this.userLogged$.getValue()._id)
+    this.DogStore.eraseDogApi(this.dogId).subscribe((dog) => {
+      this.DogStore.filterUserDogs(this.userLogged$.getValue()._id)
       this.modalService.dismissAll()
     })
+  }
+
+  close (): void {
+    this.modalService.dismissAll()
   }
 }

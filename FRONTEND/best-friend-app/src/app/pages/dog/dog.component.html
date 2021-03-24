@@ -3,7 +3,7 @@
   <h1>{{selectedDog.name}}</h1>
 
   <div class="carousel">
-  <ngb-carousel>
+  <ngb-carousel class="carousel__item">
     <ng-template ngbSlide *ngFor="let photo of selectedDog.photosURL">
       <div class="wrapper">
         <img [src]="photo" alt="selectedDog.name">

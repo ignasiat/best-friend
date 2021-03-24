@@ -1,25 +1,28 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { DogCardContentComponent } from './dog-card-content.component';
+import { DogCardContentComponent } from './dog-card-content.component'
+
+import { dogMock } from '../../constants/dog-mock'
 
 describe('DogCardContentComponent', () => {
-  let component: DogCardContentComponent;
-  let fixture: ComponentFixture<DogCardContentComponent>;
+  let component: DogCardContentComponent
+  let fixture: ComponentFixture<DogCardContentComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DogCardContentComponent ]
+      declarations: [DogCardContentComponent]
     })
-    .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DogCardContentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(DogCardContentComponent)
+    component = fixture.componentInstance
+    component.dog = dogMock
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

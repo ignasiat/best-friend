@@ -5,14 +5,13 @@ import { Dog } from '../models/Dog'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
-import { SignIn } from '../models/SignIn'
+import { SignIn } from '../models/Sign-In'
+import { urlApiDog, urlApiBreed, urlApiColor, urlApiUserShelter, urlApiSignIn, urlApiSignOut } from '../../constants/url'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogService {
-  dogsApi = 'http://localhost:5000/api'
-
   constructor (
     private httpClient: HttpClient
   ) {
@@ -20,38 +19,38 @@ export class DogService {
   }
 
   fetchDogs (): Observable<Dog[]> {
-    return this.httpClient.get<Dog[]>(`${this.dogsApi}/dog`)
+    return this.httpClient.get<Dog[]>(urlApiDog)
   }
 
   fetchBreeds (): Observable<Breed[]> {
-    return this.httpClient.get<Breed[]>(`${this.dogsApi}/breed`)
+    return this.httpClient.get<Breed[]>(urlApiBreed)
   }
 
   fetchColors (): Observable<Color[]> {
-    return this.httpClient.get<Color[]>(`${this.dogsApi}/color`)
+    return this.httpClient.get<Color[]>(urlApiColor)
   }
 
   fetchShelters (): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.dogsApi}/user/shelter`)
+    return this.httpClient.get<User[]>(urlApiUserShelter)
   }
 
   addDog (newDog: Dog): Observable<Dog> {
-    return this.httpClient.post<Dog>(`${this.dogsApi}/dog`, newDog)
+    return this.httpClient.post<Dog>(urlApiDog, newDog)
   }
 
   signIn (signInData: SignIn): Observable<User> {
-    return this.httpClient.post<User>(`${this.dogsApi}/auth/login`, signInData)
+    return this.httpClient.post<User>(urlApiSignIn, signInData)
   }
 
   signOut (): Observable<Dog[]> {
-    return this.httpClient.get<Dog[]>(`${this.dogsApi}/auth/logout`)
+    return this.httpClient.get<Dog[]>(urlApiSignOut)
   }
 
   updateApiDog (dogId: string, newData: Dog): Observable<Dog> {
-    return this.httpClient.put<Dog>(`${this.dogsApi}/dog/${dogId}`, newData)
+    return this.httpClient.put<Dog>(`${urlApiDog}/${dogId}`, newData)
   }
 
   deleteApiDog (dogId: string): Observable<Dog> {
-    return this.httpClient.delete<Dog>(`${this.dogsApi}/dog/${dogId}`)
+    return this.httpClient.delete<Dog>(`${urlApiDog}/${dogId}`)
   }
 }

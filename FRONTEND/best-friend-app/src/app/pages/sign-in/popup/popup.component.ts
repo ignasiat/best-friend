@@ -7,6 +7,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 })
 export class PopupComponent {
   constructor (
-    public modalService: NgbModal
+    private modalService: NgbModal
   ) {}
+
+  close (reason) {
+    this.modalService.dismissAll(reason)
+  }
 }

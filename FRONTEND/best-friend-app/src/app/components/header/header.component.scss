@@ -1,7 +1,6 @@
-@import '../../../styles/colors';
+@import "../../../styles/colors";
 
 .nav--mobile {
-
   mat-toolbar {
     height: 80px;
     display: flex;
@@ -23,15 +22,22 @@
   height: 50px;
 }
 
-a:link, a:visited, a:hover, a:active {
+a:link,
+a:visited,
+a:hover,
+a:active {
   text-decoration: none;
   color: $color-primary;
 }
 
-@media only screen and (min-width: 600px) {
+a {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 750px) {
   .nav--mobile {
     display: none;
-  }  
+  }
 
   .nav--desktop {
     margin: 10px 50px;
@@ -42,11 +48,12 @@ a:link, a:visited, a:hover, a:active {
       display: flex;
       .nav__logo {
         width: 120px;
-        filter: invert(36%) sepia(85%) saturate(337%) hue-rotate(122deg) brightness(98%) contrast(94%);
+        filter: invert(36%) sepia(85%) saturate(337%) hue-rotate(122deg)
+          brightness(98%) contrast(94%);
       }
       ul {
-        margin: 0px 0px 0px 40px;
-        font-family: Montserrat;
+        margin-right: 20px;
+        font-family: Montserrat, sans-serif;
         font-size: 20px;
         font-weight: 600;
         display: flex;
@@ -58,6 +65,5 @@ a:link, a:visited, a:hover, a:active {
         }
       }
     }
-
   }
 }

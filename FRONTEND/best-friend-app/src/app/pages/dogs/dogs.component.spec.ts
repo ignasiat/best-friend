@@ -31,7 +31,7 @@ describe('DogsComponent', () => {
   })
 
   it('Method search should call filteredDog method from the store', () => {
-    const filteredDogsSpy = spyOn(component.DogStoreService, 'filteredDogs')
+    const filteredDogsSpy = spyOn(component.DogStore, 'filteredDogs')
 
     component.search('fake sex', 'fake age', 'fake size')
 
@@ -40,7 +40,7 @@ describe('DogsComponent', () => {
 
   it('Should not call apiDogs onInit when dogs$ has values', () => {
     component.dogs$.next([dogMock])
-    const apiDogsSpy = spyOn(component.DogStoreService, 'apiDogsAdoption')
+    const apiDogsSpy = spyOn(component.DogStore, 'apiDogsAdoption')
 
     component.ngOnInit()
 

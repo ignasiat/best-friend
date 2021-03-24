@@ -10,18 +10,19 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
-import { HomeComponent } from './pages/home/home.component'
 import { MatButtonModule } from '@angular/material/button'
-import { HttpClientModule } from '@angular/common/http'
-import { DogsComponent } from './pages/dogs/dogs.component'
+import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
+import { HomeComponent } from './pages/home/home.component'
+import { DogsComponent } from './pages/dogs/dogs.component'
 import { DogComponent } from './pages/dog/dog.component'
 import { UserComponent } from './pages/user/user.component'
 import { DogCardComponent } from './components/dog-card/dog-card.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
 import { DogFormComponent } from './pages/dog-form/dog-form.component'
 import { SignInComponent } from './pages/sign-in/sign-in.component'
@@ -30,6 +31,7 @@ import { PopupComponent } from './pages/sign-in/popup/popup.component'
 import { UserCardComponent } from './components/user-card/user-card.component'
 import { PopupdeleteComponent } from './pages/profile/popupdelete/popupdelete.component'
 import { DogCardContentComponent } from './components/dog-card-content/dog-card-content.component'
+import { SheltersComponent } from './pages/shelters/shelters.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { DogCardContentComponent } from './components/dog-card-content/dog-card-
     PopupComponent,
     UserCardComponent,
     PopupdeleteComponent,
-    DogCardContentComponent
+    DogCardContentComponent,
+    SheltersComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { DogCardContentComponent } from './components/dog-card-content/dog-card-
     MatPaginatorModule,
     MatSortModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
   exports: [MatMenuModule],
   providers: [],

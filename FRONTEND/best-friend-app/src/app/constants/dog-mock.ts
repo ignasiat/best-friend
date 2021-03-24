@@ -2,7 +2,7 @@ import { Dog } from '../core/models/Dog'
 
 export const dogMock: Dog = {
   shelter: {
-    _id: 'String',
+    _id: 'shelterId',
     name: 'String',
     address: {
       _id: 'String',
@@ -14,7 +14,7 @@ export const dogMock: Dog = {
     },
     phone: 'String',
     email: 'String',
-    password: 'String',
+    password: '',
     website: 'String',
     information: 'String',
     photoURL: 'String',
@@ -35,5 +35,24 @@ export const dogMock: Dog = {
     name: 'String'
   },
   photosURL: ['fake photo'],
-  adoption: true
+  adoption: true,
+  owner: {
+    _id: 'ownerId',
+    name: 'String',
+    address: {
+      _id: 'String',
+      street: 'String',
+      number: 'String',
+      city: 'String',
+      region: 'String',
+      zipCode: 'String'
+    },
+    phone: 'String',
+    email: 'String',
+    password: '',
+    website: 'String',
+    information: 'String',
+    photoURL: 'String',
+    userType: 'String'
+  }
 }

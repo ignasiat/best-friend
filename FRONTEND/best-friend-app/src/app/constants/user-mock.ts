@@ -1,7 +1,7 @@
 import { User } from '../core/models/User'
 
 export const userMock: User = {
-  _id: 'String',
+  _id: 'userId',
   name: 'String',
   address: {
     _id: 'String',
@@ -13,7 +13,7 @@ export const userMock: User = {
   },
   phone: 'String',
   email: 'String',
-  password: 'String',
+  password: '',
   website: 'String',
   information: 'String',
   photoURL: 'String',

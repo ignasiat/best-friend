@@ -13,12 +13,12 @@ import { Dog } from 'src/app/core/models/Dog'
 })
 export class DogComponent implements OnInit {
   id = this.activatedRoute.snapshot.params.dogId
-  selectedDog$ = this.DogStoreService.selectedDog$
+  selectedDog$ = this.DogStore.selectedDog$
   userLogged: User
 
   constructor (
   private activatedRoute: ActivatedRoute,
-  private DogStoreService: DogStoreService,
+  public DogStore: DogStoreService,
   private router: Router,
   config: NgbCarouselConfig
   ) {
@@ -28,14 +28,14 @@ export class DogComponent implements OnInit {
   }
 
   ngOnInit (): void {
-    this.DogStoreService.getSelectedDog(this.id)
-    this.userLogged = this.DogStoreService.userLogged$.getValue()
+    this.DogStore.getSelectedDog(this.id)
+    this.userLogged = this.DogStore.userLogged$.getValue()
   }
 
   adopt (dog: Dog, userId: string) {
     const newData = { ...dog, adoption: false, owner: { _id: userId } }
     const dogId = dog._id
     delete newData._id
-    this.DogStoreService.updateDogApi(dogId, newData).subscribe(() => this.router.navigate(['/profile']))
+    this.DogStore.updateDogApi(dogId, newData).subscribe(() => this.router.navigate(['/profile']))
   }
 }
