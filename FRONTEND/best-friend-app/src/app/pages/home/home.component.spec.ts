@@ -4,8 +4,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 import { HomeComponent } from './home.component'
 
-import { dogMock } from '../../constants/dog-mock'
-
 import { DebugElement } from '@angular/core'
 
 describe('HomeComponent', () => {

@@ -1,6 +1,6 @@
 <main>
   <div class="logo">
-    <img src="../../../assets/bestfriend.png" alt="logo">
+    <img src="../../../assets/bestfriend.png" alt="logo" />
     <div>
       <h1>Find your best friend!</h1>
       <h2>Adopt now!</h2>
@@ -8,9 +8,11 @@
   </div>
 
   <section>
-    <mat-card *ngFor="let dog of dogs$ | async" class="example-card">    
-    <app-dog-card [dog]="dog"></app-dog-card>
+    <mat-card
+      *ngFor="let dog of dogs$ | async | slice: 0:6"
+      class="example-card"
+    >
+      <app-dog-card [dog]="dog"></app-dog-card>
     </mat-card>
   </section>
-
 </main>

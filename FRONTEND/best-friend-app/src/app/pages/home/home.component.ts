@@ -1,6 +1,5 @@
-import { Component } from '@angular/core'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Component, OnInit } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
 import { Dog } from 'src/app/core/models/Dog'
 import { DogStoreService } from 'src/app/core/services/dog-store.service'
 
@@ -9,12 +8,16 @@ import { DogStoreService } from 'src/app/core/services/dog-store.service'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  dogs$: Observable<Dog[]> = this.DogStoreService.apiDogsAdoption()
-    .pipe(
-      map((dogsArray) => dogsArray.slice(0, 6)))
+export class HomeComponent implements OnInit {
+  dogs$: BehaviorSubject<Dog[]> = this.DogStore.dogsAdoption$
 
   constructor (
-    public DogStoreService: DogStoreService
+    public DogStore: DogStoreService
   ) {}
+
+  ngOnInit (): void {
+    if (!this.dogs$.getValue().length) {
+      this.DogStore.apiDogsAdoption().subscribe()
+    }
+  }
 }
