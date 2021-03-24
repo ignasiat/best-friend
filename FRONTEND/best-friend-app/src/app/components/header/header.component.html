@@ -21,14 +21,10 @@
         </a>
       </button>
       <button mat-menu-item>
-        <mat-icon>group</mat-icon>
-        <span>Members</span>
-      </button>
-      <button mat-menu-item>
-        <a routerLink="/form">
-          <mat-icon>info</mat-icon>
-          <span>About Us</span>
-      </a>
+        <a routerLink="/shelters">
+          <mat-icon>group</mat-icon>
+          <span>Shelters</span>
+        </a>
       </button>
       <button *ngIf="!this.userLogged" mat-menu-item>
         <a routerLink="/signin">
@@ -43,12 +39,20 @@
     </mat-menu>
     <div *ngIf="!this.userLogged">
       <a routerLink="/signin">
-        <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+        <img
+          src="../../../assets/avatar-profile.jpg"
+          alt="user"
+          class="nav__image"
+        />
       </a>
     </div>
     <div *ngIf="this.userLogged">
-      <a [routerLink]='["/profile"]'>
-        <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
+      <a [routerLink]="['/profile']">
+        <img
+          src="{{ this.userLogged.photoURL }}"
+          alt="user"
+          class="nav__image"
+        />
       </a>
     </div>
   </mat-toolbar>
@@ -56,25 +60,32 @@
 
 <nav class="nav--desktop" aria-label="Menu Site">
   <div>
-  <img src="../../../assets/bestfriend-menu.svg" alt="logo" class="nav__logo">
+    <img
+      src="../../../assets/bestfriend-menu.svg"
+      alt="logo"
+      class="nav__logo"
+    />
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/dogs">Dogs</a></li>
-      <li>Members</li>
-      <li><a routerLink="/form">About Us</a></li>
+      <li><a routerLink="/shelters">Shelters</a></li>
       <li *ngIf="!this.userLogged"><a routerLink="/signin">Sign In</a></li>
       <li *ngIf="this.userLogged"><a (click)="logout()">Sign Out</a></li>
     </ul>
-  </div>  
-  
+  </div>
+
   <div *ngIf="!this.userLogged">
     <a routerLink="/signin">
-      <img src='../../../assets/avatar-profile.jpg' alt="user" class="nav__image" />
+      <img
+        src="../../../assets/avatar-profile.jpg"
+        alt="user"
+        class="nav__image"
+      />
     </a>
   </div>
   <div *ngIf="this.userLogged">
-    <a [routerLink]='["/profile"]'>
-      <img src={{this.userLogged.photoURL}} alt="user" class="nav__image" />
+    <a [routerLink]="['/profile']">
+      <img src="{{ this.userLogged.photoURL }}" alt="user" class="nav__image" />
     </a>
   </div>
 </nav>
