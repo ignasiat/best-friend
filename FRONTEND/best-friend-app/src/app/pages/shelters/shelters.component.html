@@ -1,0 +1,23 @@
+<h1>Shelters</h1>
+<section>
+  <mat-card *ngFor="let shelter of shelters$ | async" class="example-card">
+    <mat-card-header>
+      <mat-card-title>
+        <a [routerLink]="['/user', shelter._id]">
+          {{ shelter.name }}
+        </a>
+      </mat-card-title>
+    </mat-card-header>
+    <a [routerLink]="['/user', shelter._id]"
+      ><img
+        mat-card-image
+        src="{{ shelter.photoURL }}"
+        alt="{{ shelter.name }}"
+    /></a>
+    <mat-card-content>
+      <p>
+        {{ shelter.information }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</section>
