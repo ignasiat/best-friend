@@ -16,7 +16,7 @@ import { sexs } from '../../constants/sexs'
 export class DogFormComponent implements OnInit {
   constructor (
     private fb: FormBuilder,
-    public DogStoreService: DogStoreService,
+    public DogStore: DogStoreService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -26,9 +26,9 @@ export class DogFormComponent implements OnInit {
   sexArray = sexs
   ageArray = ages
   sizeArray = sizes
-  breeds$ = this.DogStoreService.apiBreeds()
-  colors$ = this.DogStoreService.apiColors()
-  shelters$ = this.DogStoreService.apiShelter()
+  breeds$ = this.DogStore.apiBreeds()
+  colors$ = this.DogStore.apiColors()
+  shelters$ = this.DogStore.apiShelter()
   filesArray: string[] = []
 
   selectedDog: Dog
@@ -53,9 +53,9 @@ export class DogFormComponent implements OnInit {
     delete dataSend._id
     dataSend.owner = null
     if (dogId === '') {
-      this.DogStoreService.addApiDogs(dataSend).subscribe((newDog) => this.router.navigate(['/dog', newDog._id]))
+      this.DogStore.addApiDogs(dataSend).subscribe((newDog) => this.router.navigate(['/dog', newDog._id]))
     } else {
-      this.DogStoreService.updateDogApi(dogId, dataSend).subscribe((updatedDog) => { this.DogStoreService.filterAdoptionDogs(); this.router.navigate(['/dog', updatedDog._id]) })
+      this.DogStore.updateDogApi(dogId, dataSend).subscribe((updatedDog) => { this.DogStore.filterAdoptionDogs(); this.router.navigate(['/dog', updatedDog._id]) })
     }
   }
 
@@ -70,8 +70,8 @@ export class DogFormComponent implements OnInit {
 
   ngOnInit (): void {
     if (this.id !== 1) {
-      this.DogStoreService.getSelectedDog(this.id)
-      this.DogStoreService.selectedDog$.subscribe((dog) => {
+      this.DogStore.getSelectedDog(this.id)
+      this.DogStore.selectedDog$.subscribe((dog) => {
         this.selectedDog = dog
         if (dog) {
           this.dogForm.patchValue(dog)
