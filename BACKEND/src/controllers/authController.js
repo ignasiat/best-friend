@@ -19,9 +19,9 @@ async function register(req, res) {
   }
 }
 
-function login(req, res) {
+async function login(req, res) {
   req.params.userId = req.user._id;
-  userController.getUserById(req, res);
+  await userController.getUserById(req, res);
 }
 
 function logout(req, res) {
