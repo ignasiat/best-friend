@@ -13,21 +13,21 @@ export class UserComponent implements OnInit {
 
   constructor (
     private activatedRoute: ActivatedRoute,
-    private DogStoreService: DogStoreService
+    private DogStore: DogStoreService
   ) {}
 
-  selectedshelter$ = this.DogStoreService.apiShelter()
+  selectedshelter$ = this.DogStore.apiShelter()
     .pipe(
       map((shelters) => shelters.find((shelter) => shelter._id === this.id))
     )
 
-  dogsUser$ = this.DogStoreService.dogsUser$
+  dogsUser$ = this.DogStore.dogsUser$
     .pipe(
       map(dogs => dogs.filter(dog => dog.adoption)
       )
     )
 
   ngOnInit () {
-    this.DogStoreService.filterUserDogs(this.id)
+    this.DogStore.filterUserDogs(this.id)
   }
 }
