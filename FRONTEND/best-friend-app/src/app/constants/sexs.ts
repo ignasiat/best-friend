@@ -1,3 +1,3 @@
 import { constants } from './index'
 
-export const sexs: String[] = [constants.FEMALE, constants.MALE]
+export const sexs: string[] = [constants.FEMALE, constants.MALE]
