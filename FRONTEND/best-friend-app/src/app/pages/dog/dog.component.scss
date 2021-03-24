@@ -3,10 +3,10 @@
 @import "../../../styles/title";
 
 
-ngb-carousel, img {
+.carousel__item, img {
   max-width: 500px;
 }
-ngb-carousel {
+.carousel__item {
   margin: 0 auto;
 }
 .dog-data {
@@ -25,7 +25,6 @@ ngb-carousel {
     display: flex;
     justify-content: center;
     button {
-      font-size: 32px;
       font-weight: 400;
       box-shadow:inset 0px 1px 3px 0px #91b8b3;
       background:linear-gradient(to bottom, #394542 5%, #6c7c7c 100%);
@@ -34,7 +33,7 @@ ngb-carousel {
       display:inline-block;
       cursor:pointer;
       color:#ffffff;
-      font-family:Arial;
+      font-family:Arial, sans-serif;
       font-size:20px;
       padding:11px 23px;
       text-decoration:none;
@@ -47,7 +46,7 @@ ngb-carousel {
 }
 
 @media only screen and (min-width: 988px) {
-  ngb-carousel, img {
+  .carousel__item, img {
     max-width: 800px;
   }
   .dog-data__group {
