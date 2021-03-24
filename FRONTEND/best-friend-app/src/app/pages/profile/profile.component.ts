@@ -15,24 +15,24 @@ import { tap } from 'rxjs/operators'
 
 export class ProfileComponent implements OnInit {
   constructor (
-    private DogStoreService: DogStoreService,
+    private DogStore: DogStoreService,
     private router: Router,
     private modalService: NgbModal
   ) {}
 
-  dogs$: BehaviorSubject<Dog[]> = this.DogStoreService.dogs$
-  dogsUser$: BehaviorSubject<Dog[]> = this.DogStoreService.dogsUser$
+  dogs$: BehaviorSubject<Dog[]> = this.DogStore.dogs$
+  dogsUser$: BehaviorSubject<Dog[]> = this.DogStore.dogsUser$
   dogsUserForAdoption: Dog[]
   dogsUserAdopted: Dog[]
   dogsOwner: Dog[]
   isLogged$ = new BehaviorSubject(null);
 
-  userLogged$ = this.DogStoreService.userLogged$
+  userLogged$ = this.DogStore.userLogged$
     .pipe(
       tap(isLogged => !isLogged && this.router.navigate(['/'])),
       tap(user => {
         if (user) {
-          this.DogStoreService.filterUserDogs(user._id)
+          this.DogStore.filterUserDogs(user._id)
           this.isLogged$.next(user)
           this.filter(user._id)
         }
@@ -41,10 +41,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit () {
     if (!this.dogs$.getValue().length) {
-      this.DogStoreService.apiDogsAdoption().subscribe(() => {
+      this.DogStore.apiDogsAdoption().subscribe(() => {
         const user = this.isLogged$.getValue()
         if (user) {
-          this.DogStoreService.filterUserDogs(user._id)
+          this.DogStore.filterUserDogs(user._id)
+          this.filter(user._id)
         }
       })
     }
@@ -55,7 +56,7 @@ export class ProfileComponent implements OnInit {
     modalRef.componentInstance.dogId = dogId
     modalRef.dismissed.subscribe(() => {
       this.filter(this.isLogged$.getValue()._id)
-      this.DogStoreService.filterAdoptionDogs()
+      this.DogStore.filterAdoptionDogs()
     })
   }
 
@@ -69,10 +70,10 @@ export class ProfileComponent implements OnInit {
     const updatedDog = { ...dog, adoption, owner: null }
     const dogId = dog._id
     delete updatedDog._id
-    this.DogStoreService.updateDogApi(dogId, updatedDog).subscribe(() => {
+    this.DogStore.updateDogApi(dogId, updatedDog).subscribe(() => {
       const user = this.isLogged$.getValue()
       if (user) {
-        this.DogStoreService.filterUserDogs(user._id)
+        this.DogStore.filterUserDogs(user._id)
         this.filter(user._id)
       }
     })
