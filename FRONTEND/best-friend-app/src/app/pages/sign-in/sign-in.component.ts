@@ -13,7 +13,7 @@ import { PopupComponent } from './popup/popup.component'
 export class SignInComponent {
   constructor (
     private fb: FormBuilder,
-    private DogStoreService: DogStoreService,
+    private DogStore: DogStoreService,
     private router: Router,
     private modalService: NgbModal
   ) {}
@@ -26,7 +26,7 @@ export class SignInComponent {
   })
 
   signIn () {
-    this.DogStoreService.apiSignIn(this.signInForm.value).subscribe((element) => {
+    this.DogStore.apiSignIn(this.signInForm.value).subscribe((element) => {
       this.userLogged$ = element
       if (element) {
         this.router.navigate(['/profile'])
