@@ -5,7 +5,7 @@ import { Dog } from '../models/Dog'
 import { Color } from '../models/Color'
 import { Breed } from '../models/Breed'
 import { User } from '../models/User'
-import { SignIn } from '../models/SignIn'
+import { SignIn } from '../models/Sign-In'
 
 @Injectable({
   providedIn: 'root'
