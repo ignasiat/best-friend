@@ -5,4 +5,4 @@ Full stack application done at Skylab Coders Academy. Best friend is the place w
 Build with Angular framework and tested with Karma(Jasmine).
 
 ## BackEnd
-Build a restful API with NodeJS, ExpressJS and Mongoose.
+Build a restful API with NodeJS, ExpressJS and Mongoose. Tested with Jest.
